@@ -48,3 +48,9 @@ Issues and pull requests are welcome, especially corrections for newer Angular v
 ## License
 
 MIT, see [`LICENSE`](LICENSE).
+
+## Optional agents
+
+`SKILL.md` is the main file. For Claude Code there are three small, optional subagents in [`agents/`](agents/). Copy them to `.claude/agents/` if you want delegated helpers: `angular-reviewer` (read-only review), `angular-a11y-checker` (read-only accessibility pass), `angular-test-writer` (bounded test writing). They are not needed for the workflow.
+
+**Skill vs agent in one line:** a skill is instructions your main assistant follows; an agent is a separate helper with its own focused job and tool limits that the main assistant hands a task to and gets a result back from.
