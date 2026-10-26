@@ -6,7 +6,7 @@ Apply only if the repo's Angular version supports it and the codebase already mo
 - Standalone components/directives/pipes. No new NgModules in a standalone codebase.
 - `input()`, `input.required()`, `output()`, `model()`; `viewChild()`/`contentChild()` signal queries.
 - `signal()`, `computed()`, `linkedSignal()` for state. `effect()` is for side effects (logging, DOM, storage), never to derive state or write signals in loops.
-- `ChangeDetectionStrategy.OnPush`. Check whether the app is zoneless (`provideZonelessChangeDetection()`) before relying on `NgZone` or zone-patched behavior.
+- `ChangeDetectionStrategy.OnPush`. Check whether the app is zoneless (`provideZonelessChangeDetection()`; its stability depends on the Angular version, so verify in the repo's version) before relying on `NgZone` or zone-patched behavior.
 - `inject()` for DI; `providedIn: 'root'` for app-wide services. Keep components thin; data access lives in services.
 - Built-in control flow: `@if`, `@for (x of xs; track x.id)` (stable unique id, not the index for mutable lists), `@switch`, `@defer` for non-critical UI.
 - Lazy routes via `loadComponent`/`loadChildren`; functional guards/resolvers; `withComponentInputBinding()` for route params as inputs.
@@ -35,3 +35,6 @@ Semantic elements (`button`, `a`, `label`), keyboard operability and visible foc
 
 ## Security baseline
 Angular sanitizes by default: never `bypassSecurityTrust*` or `[innerHTML]` with untrusted input; do not build URLs/HTML from user input; keep tokens out of `localStorage` where HttpOnly cookies are feasible (+ XSRF config); never commit secrets or put them in the bundle (anything shipped to the browser is public).
+
+## SSR and hydration (only if the app uses `@angular/ssr`)
+Code that runs on the server must not touch `window`, `document` or `localStorage` directly; use `afterNextRender`/`afterRender`, `isPlatformBrowser`, or injected abstractions. Avoid non-deterministic rendering (random ids, `Date.now()`) that causes hydration mismatches. Never share per-request state in module-level singletons. Validate the host header and never build server-side requests from raw user input.
