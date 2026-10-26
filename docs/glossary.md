@@ -6,6 +6,7 @@ Software Development Life Cycle (SDLC) = the stages work goes through from idea 
 | Stage | What happens | Skill here |
 |---|---|---|
 | Discovery / requirements | Understand the user problem and constraints; decide what is in scope | `angular-engineer` (Clarify), `angular-architect` |
+| Refinement / scoping | Turn a vague ticket into acceptance criteria, slices and a Definition of Ready | `angular-refine` |
 | Design / architecture | Decide structure, data flow, state, integrations, risks | `angular-architect` |
 | Implementation | Write the code in small, reviewable slices | `angular-engineer` |
 | Testing | Prove it works: unit, component, integration, end-to-end | `angular-engineer` reference, `angular-test-writer` |
@@ -20,6 +21,10 @@ Software Development Life Cycle (SDLC) = the stages work goes through from idea 
 ## Terms
 - **Requirement:** something the system must do (functional) or how well it must do it (non-functional / quality attribute: performance, security, accessibility, availability).
 - **Acceptance criteria:** concrete checks that say a feature is done.
+- **Refinement (grooming):** the team session or task of clarifying a ticket before work starts.
+- **Definition of Ready (DoR):** the checklist a ticket must pass before anyone starts it (clear goal, testable criteria, known dependencies).
+- **Given/When/Then:** a format for acceptance criteria: the starting situation, the action, the expected result.
+- **Spike:** see Technical spike below; used in refinement to resolve a risky unknown first.
 - **Definition of Done (DoD):** the team's checklist every change must satisfy (tests pass, reviewed, accessible, documented).
 - **Vertical slice:** a thin end-to-end piece of a feature (UI to data) that works on its own, instead of building layer by layer.
 - **ADR (Architecture Decision Record):** a short document recording a significant decision, why, and the alternatives.

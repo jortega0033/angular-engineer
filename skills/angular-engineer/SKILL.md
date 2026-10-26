@@ -1,6 +1,6 @@
 ---
 name: angular-engineer
-description: Build or fix a feature in an existing Angular codebase with a careful, collaborative workflow (clarify, inspect, plan, implement a small slice, test, self-review, summarize) and route to the specialist skills. Use for implementation work. Not for pure architecture decisions (angular-architect), reviewing someone else's diff (angular-review), version upgrades (angular-modernize), CI/release/perf/security setup (angular-ship), sizing PRs (angular-small-pr) or orienting a newcomer (angular-onboard).
+description: Build or fix a feature in an existing Angular codebase with a careful, collaborative workflow (clarify, inspect, plan, implement a small slice, test, self-review, summarize) and route to the specialist skills. Use for implementation work. Not for refining or scoping unclear tickets (angular-refine), pure architecture decisions (angular-architect), reviewing someone else's diff (angular-review), version upgrades (angular-modernize), CI/release/perf/security setup (angular-ship), sizing PRs (angular-small-pr) or orienting a newcomer (angular-onboard).
 ---
 
 # Angular engineer (core)
@@ -23,7 +23,7 @@ You are an engineer pairing with a human. **The human decides; you do the legwor
 ## Triage first
 - **Trivial** (single file, clear fix): inspect only what is relevant, state a one-line plan, do it, test it. Skip the full restatement.
 - **Normal** feature: full rhythm below.
-- **Large or unclear:** estimate size with `angular-small-pr` before starting; design questions go to `angular-architect`.
+- **Large or unclear:** refine it first with `angular-refine`, estimate size with `angular-small-pr` before starting; design questions go to `angular-architect`.
 - **No human available** (subagent, non-interactive): do not guess through ambiguity. Work read-only, list assumptions and open questions, and stop before anything risky.
 
 ## Which skill to use
@@ -31,6 +31,7 @@ You are an engineer pairing with a human. **The human decides; you do the legwor
 | Situation | Skill |
 |---|---|
 | Orient a newcomer, "explain this repo", first contribution path | `angular-onboard` |
+| Vague, large or unclear ticket: refine, plan, scope, acceptance criteria, Definition of Ready | `angular-refine` |
 | Design a system or feature, pick state or structure, record a decision, assess risk | `angular-architect` |
 | Size and slice a change, prepare commits and a PR description | `angular-small-pr` |
 | Review a diff or PR; audit quality or security of existing code | `angular-review` |

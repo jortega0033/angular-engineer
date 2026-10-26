@@ -9,6 +9,7 @@ One idea runs through it: **the human decides, the agent does the legwork and sh
 | Skill | Use it for |
 |---|---|
 | `angular-engineer` | Core workflow and the always-on safety rules: Clarify, Inspect, Plan, Implement, Test, Self-review, Summarize. Routes to the others. |
+| `angular-refine` | Turning a vague or large ticket into a plan: Angular-specific questions, acceptance criteria, vertical slices, risks, Definition of Ready. No code. |
 | `angular-onboard` | Getting a human oriented in an existing repo: evidence-cited map, how to run it, one traced flow, hot spots, first contribution options. |
 | `angular-architect` | Design and decisions: requirements, options and trade-offs, state and structure, ADRs, risk, slicing work. |
 | `angular-small-pr` | Sizing before coding (default: up to 100 lines and 10 files is one PR, up to 400 and 20 is a stack of 2-4, above that refuse and pre-scope), checking the real diff against the estimate, commits and PR description. Adapted from [pipenzo](https://github.com/jortega0033/pipenzo). |
