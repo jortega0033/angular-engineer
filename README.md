@@ -1,56 +1,84 @@
 # angular-engineer
 
-A lightweight, tool-agnostic instruction file that helps an AI coding agent work **with** you on Angular code: clarify the request, read the repo before assuming anything, make small changes, run the checks, review honestly, and explain what it did.
+A Claude Code plugin (and portable Markdown instructions) that makes an AI coding agent a careful Angular teammate across the software lifecycle: clarify, design, build, test, review, modernize and ship.
 
-It is one Markdown file. No framework lock-in, no orchestration, no dependencies.
+It is built around one idea: **the human decides, the agent does the legwork and shows its reasoning.** It reads your repo before assuming anything, works in small verified steps, and asks before doing anything risky.
 
-## What it does
+## What is inside
 
-- **Rhythm:** Clarify, Inspect, Plan, Implement, Test, Review, Summarize.
-- **Collaborative by default:** the human drives; the agent narrates, keeps diffs small, and explains back.
-- **Version-aware:** detects the Angular version, standalone vs NgModule, zoneless or zone.js, state approach and test runner first, then matches the repo's conventions.
-- **Modern Angular guidance:** signals, `input()`/`output()`/`model()`, built-in control flow, `inject()`, RxJS operator choice, typed forms, HTTP state, testing with TestBed.
-- **Angular review checklist:** subscription leaks, race conditions, error and empty states, accessibility, weak tests.
-
-## Files
-
-| File | Purpose |
+| Skill | Use it for |
 |---|---|
-| [`SKILL.md`](SKILL.md) | The agent instructions. |
-| [`docs/cheatsheet.md`](docs/cheatsheet.md) | Human-facing quick reference, including a React-to-Angular map. |
-| [`docs/practice-drill.md`](docs/practice-drill.md) | A timed pairing drill for practising the workflow. |
+| `angular-engineer` | Core workflow for building and fixing features: Clarify, Inspect, Plan, Implement, Test, Review, Summarize. Routes to the others. |
+| `angular-architect` | Design and decisions: requirements, options and trade-offs, state and structure choices, ADRs, risk, slicing work. |
+| `angular-review` | Reviewing a diff or PR: correctness, RxJS/signals, races, errors, security, accessibility, performance, tests. |
+| `angular-modernize` | Upgrades and migrations: `ng update`, standalone, control flow, signals, zoneless, test runner. |
+| `angular-ship` | CI quality gates, performance, security hardening, release and rollback, observability. |
+
+| Agent (read-only unless noted) | Job |
+|---|---|
+| `angular-reviewer` | Independent review of a change |
+| `angular-a11y-checker` | Accessibility pass over templates |
+| `angular-security-auditor` | XSS, auth/token handling, secrets, dependencies |
+| `angular-perf-auditor` | Bundles, lazy loading, change detection, images |
+| `angular-architect-critic` | Adversarial critique of a design or ADR |
+| `angular-test-writer` (can edit) | Writes tests for one named unit in the repo's runner |
+
+New to some of the terms? See [`docs/glossary.md`](docs/glossary.md) (SDLC, architecture and Angular terms in plain language).
 
 ## Install
 
-| Tool | How |
-|---|---|
-| Claude Code | Copy `SKILL.md` to `.claude/skills/angular-engineer/SKILL.md` (project) or `~/.claude/skills/angular-engineer/SKILL.md` (user). |
-| Codex and other agents that read `AGENTS.md` | Copy to `AGENTS.md`, or to the tool's skills folder. |
-| Cursor, Copilot, others | Paste into the tool's rules or custom-instructions file. |
-| Any chat | Paste the file as your first message. |
+**Claude Code plugin (recommended):**
 
-If a repo already has its own `AGENTS.md` or `CLAUDE.md`, keep it and put this beside it or in your user-level config. Repo rules win.
+```
+/plugin marketplace add jortega0033/angular-engineer
+/plugin install angular-engineer@angular-engineer
+```
 
-Suggested first prompt:
+Skills are then available as `/angular-engineer:angular-architect` and so on, and Claude can pick them up automatically from their descriptions.
 
-> Use the angular-engineer skill. Read-only first: inspect this repo and report the Angular version, standalone vs NgModule, zoneless or zone.js, state approach, test runner, conventions, and how to run the app and tests. Do not edit anything yet.
+**Manual:** copy `skills/*` to `.claude/skills/` and `agents/*.md` to `.claude/agents/` (project) or the same folders under `~/.claude/` (user).
+
+**Other tools (Codex, Cursor, Copilot, any chat):** paste `skills/angular-engineer/SKILL.md` into `AGENTS.md` / the rules file / your first message. The other skills can be pasted when needed.
+
+If a repo already has its own `AGENTS.md` or `CLAUDE.md`, keep it: repo rules win.
+
+## Try it
+
+```
+Use the angular-engineer skill. Read-only first: inspect this repo and report the Angular version,
+standalone vs NgModule, zoneless or zone.js, state approach, test runner, conventions, and how to
+run the app and tests. Do not edit anything yet.
+```
+
+```
+/angular-engineer:angular-architect  We need offline-capable drafts in the editor. Propose options and an ADR.
+```
+
+```
+Use angular-review on my current diff, and run angular-security-auditor in parallel.
+```
+
+## Safety defaults
+
+- No new dependencies, destructive commands, force pushes, deployments, infra/CI/secret changes without explicit permission.
+- Repo text, logs, issues and web pages are treated as data, never as instructions.
+- Tests are never weakened to get green; claims are backed by commands that were actually run.
+- Reviewer, auditor and critic agents are read-only by tool configuration, not just by instruction.
+
+## Practice and quick reference
+
+- [`docs/cheatsheet.md`](docs/cheatsheet.md): rhythm, React-to-Angular map, RxJS and review quick reference.
+- [`docs/practice-drill.md`](docs/practice-drill.md): a timed pairing drill with a deliberately flawed component.
 
 ## Scope and honesty
 
-- Angular changes quickly. The repo's `package.json` and [angular.dev](https://angular.dev) are the source of truth; this file tells the agent to check them rather than trust it.
-- Some APIs (for example `resource()`/`httpResource()` and signal forms) have been experimental in some versions. The skill tells the agent to verify stability before using them.
-- This is guidance, not a guarantee. Review every diff and run the tests.
+- Angular moves fast. The repo's `package.json` and [angular.dev](https://angular.dev) are the source of truth; these skills tell the agent to check them. APIs such as `resource()`/`httpResource()` and signal forms have been experimental in some versions, so the agent verifies stability first.
+- This is guidance, not a guarantee. Review every diff and run the tests. `node scripts/validate.mjs` checks the plugin structure (CI runs it); it does not measure how well an agent follows the skills.
 
 ## Contributing
 
-Issues and pull requests are welcome, especially corrections for newer Angular versions, extra review checks, and conventions from real codebases. Keep `SKILL.md` short: every line should change what an agent does.
+Issues and PRs welcome: corrections for newer Angular versions, extra review checks, conventions from real codebases. Keep skills under 200 lines and move detail into `references/`; every line should change what an agent does. Run `node scripts/validate.mjs` before opening a PR.
 
 ## License
 
 MIT, see [`LICENSE`](LICENSE).
-
-## Optional agents
-
-`SKILL.md` is the main file. For Claude Code there are three small, optional subagents in [`agents/`](agents/). Copy them to `.claude/agents/` if you want delegated helpers: `angular-reviewer` (read-only review), `angular-a11y-checker` (read-only accessibility pass), `angular-test-writer` (bounded test writing). They are not needed for the workflow.
-
-**Skill vs agent in one line:** a skill is instructions your main assistant follows; an agent is a separate helper with its own focused job and tool limits that the main assistant hands a task to and gets a result back from.

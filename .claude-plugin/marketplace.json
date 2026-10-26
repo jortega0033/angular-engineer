@@ -1,0 +1,12 @@
+{
+  "name": "angular-engineer",
+  "owner": { "name": "Jake Ortega" },
+  "metadata": { "description": "Angular engineering skills and agents for Claude Code." },
+  "plugins": [
+    {
+      "name": "angular-engineer",
+      "source": "./",
+      "description": "Angular engineering skills and agents: delivery, architecture, review, modernization, shipping."
+    }
+  ]
+}
