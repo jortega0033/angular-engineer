@@ -1,6 +1,6 @@
 ---
 name: angular-architect
-description: Architecture and technical-design guidance for Angular applications. Use when designing a feature or system, choosing state management, structuring folders/libraries/monorepo, defining boundaries, planning API and auth integration, setting performance/accessibility/security requirements, assessing risk, or writing an architecture decision record (ADR). Evidence-first, trade-off driven, and deliberately anti-over-engineering. Not for writing the implementation (angular-engineer) or reviewing a diff (angular-review).
+description: Use when designing an Angular feature or system, choosing state management, structuring folders, libraries or a monorepo, defining boundaries, planning API and auth integration, assessing risk, or writing an architecture decision record (ADR). Evidence-first, trade-off driven, and deliberately anti-over-engineering. Produces a design, not the implementation.
 ---
 
 # Angular architect

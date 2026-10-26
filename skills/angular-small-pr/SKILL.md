@@ -1,6 +1,6 @@
 ---
 name: angular-small-pr
-description: Keep every change small enough for a human to review properly. Use before starting any non-trivial Angular change and when preparing commits or a pull request - estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission. Not for the implementation itself (angular-engineer) or the review (angular-review).
+description: Use before starting any non-trivial Angular change, and when preparing commits or a pull request, to keep the change small enough for a human to review properly. Estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission.
 ---
 
 # Angular small PR
@@ -19,7 +19,7 @@ Predict **changed lines** (added + removed, excluding lockfiles and generated fi
 | Above that, or no clean layering at any size | **Do not start.** Say "too big for one reviewable change", give the estimate and a proposed split or pre-scoping questions (spike, design doc/ADR, feature flag plan), and hand back to the human. Refusing is a valid outcome, not a failure. |
 
 ## 2. How to slice Angular work
-Order PRs so each one builds, passes tests and can ship alone (behind a flag if user-visible):
+Prefer vertical slices: PR 1 is the thinnest user-visible path (behind a flag if incomplete), later PRs widen it. When the work cannot be sliced that way, layer it so each PR builds, passes tests and can ship alone (behind a flag if user-visible):
 1. Types/models and API client or service (+ its tests), no UI wired yet.
 2. Presentational components with inputs/outputs (+ component tests), not yet routed.
 3. Smart/container wiring, routing, state, loading/empty/error states.

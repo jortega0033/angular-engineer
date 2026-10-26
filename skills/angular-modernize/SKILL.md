@@ -1,6 +1,6 @@
 ---
 name: angular-modernize
-description: Plan and carry out safe Angular upgrades and modernization - ng update across major versions, NgModules to standalone, structural directives to built-in control flow, decorators to signal inputs/outputs/queries, constructor DI to inject(), zoneless, test runner migration. Use when a codebase is behind or mixes old and new patterns. Not for feature work (angular-engineer) or CI/release setup (angular-ship).
+description: Use when upgrading Angular or moving old patterns to modern ones - ng update across major versions, NgModules to standalone, *ngIf/*ngFor to @if/@for, decorators to signal inputs/outputs/queries, constructor DI to inject(), zoneless, test runner migration. Plans and carries out safe, incremental, reversible migrations.
 ---
 
 # Angular modernize
@@ -15,7 +15,7 @@ Migrations are risky mainly because they are large. Make them **small, verified 
 - **One major version at a time.** Read the update guide (angular.dev/update-guide) for the exact from/to path and the Node, TypeScript and RxJS requirements, and release notes for breaking changes.
 - **Peer dependency conflicts:** resolve deliberately. `--force`/`--legacy-peer-deps` only with the human's approval and a note in the summary.
 - **Verify after each step:** build, tests, lint, smoke test of critical flows; report evidence.
-- **Stop and report** when: the baseline is red; a schematic touches far more files than expected (more than ~25, or >400 lines, unless it is purely mechanical and the human agreed); `ng update` fails halfway; a third-party library has no support for the target version; tests need weakening to pass.
+- **Stop and report** when: the baseline is red; a schematic touches far more files than expected (more than 20 files or 400 lines, the same limits as `angular-small-pr`, unless it is purely mechanical and the human agreed); `ng update` fails halfway; a third-party library has no support for the target version; tests need weakening to pass.
 - **Ask before:** changing the test runner, bumping major third-party libraries, changing build tooling, touching CI.
 
 ## Process
@@ -26,7 +26,7 @@ Migrations are risky mainly because they are large. Make them **small, verified 
    - `*ngIf/*ngFor/*ngSwitch` -> `@if/@for/@switch` (review the `track` expressions it adds).
    - `@Input()/@Output()/@ViewChild` -> `input()/output()/viewChild()`.
    - Constructor injection -> `inject()` where the repo wants it.
-   - **Manual and per component, not mechanical:** adopting `OnPush` (breaks mutable inputs and in-place updates) and signals; do leaf components first with tests.
+   - **Manual and per component, not mechanical:** adopting `OnPush` before v22, where it becomes the default (breaks mutable inputs and in-place updates) and signals; do leaf components first with tests.
    - zone.js -> zoneless only after auditing zone-dependent code, checking stability in the target version, and testing thoroughly.
    - Test runner migration: check the current official recommendation for the target Angular version; do it in its own PR and compare test counts before and after.
 4. **Clean up:** remove only dead code the migration made unused; update lint rules, docs and the ADR log.

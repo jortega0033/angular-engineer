@@ -1,6 +1,6 @@
 ---
 name: angular-ship
-description: CI quality gates, build and bundle budgets, performance, security hardening, release/rollback planning and observability for Angular applications. Use when setting up or fixing CI, shrinking bundles, improving Core Web Vitals, auditing security posture, or planning a release. Reviews and proposes; never deploys, publishes, tags or changes infrastructure itself. Not for feature work (angular-engineer) or upgrades (angular-modernize).
+description: Use when setting up or fixing CI, shrinking bundles, improving Core Web Vitals, hardening security, or planning a release or rollback of an Angular app. Covers CI quality gates, build and bundle budgets, performance, security, release and observability. Reviews and proposes; never deploys, publishes, tags or changes infrastructure itself.
 ---
 
 # Angular ship

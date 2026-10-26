@@ -3,7 +3,7 @@
 Version-gated: verify in the repo's Angular version. The official `angular-developer` skill wins on API details.
 
 **SSR and hydration (only if the app uses `@angular/ssr`)**
-- Server-run code must not touch `window`, `document` or `localStorage` directly; use `afterNextRender`/`afterRender`, `isPlatformBrowser`, or injected abstractions.
+- Server-run code must not touch `window`, `document` or `localStorage` directly; use `afterNextRender`/`afterEveryRender`, `isPlatformBrowser`, or injected abstractions.
 - Avoid non-deterministic rendering (random ids, `Date.now()`) that causes hydration mismatches.
 - Never share per-request state in module-level singletons; validate the host header; never build server-side requests from raw user input (SSRF).
 
