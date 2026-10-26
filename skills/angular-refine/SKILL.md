@@ -23,7 +23,7 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
 4. **Acceptance criteria:** short, testable, user-visible. Prefer Given/When/Then; cover happy path, empty, error and permission cases. Each criterion maps to a test or a manual check.
 5. **Slice vertically:** thin end-to-end slices that each ship value or sit behind a flag, ordered by dependency and risk (riskiest unknown first, or a time-boxed spike). Typical Angular order: contract/types and service -> presentational components -> wiring, routing, state and states (loading/empty/error) -> polish and cleanup. For each slice: goal, files/areas, test, rough size class. Hand exact sizing and PR stacking to `angular-small-pr`; hand structural or state-management questions to `angular-architect`.
 6. **Risks, dependencies, assumptions:** list each with an owner and how to reduce it (spike, mock, question to the PM/backend/design, flag). Name anything irreversible.
-7. **Definition of Ready check** (below). If not ready, say exactly what blocks it and who can unblock it. Refusing to call a ticket ready is a valid, useful outcome.
+7. **Definition of Ready check** (below), then the **Decision**. If not ready, say exactly what blocks it and who can unblock it. Refusing to call a ticket ready is a valid, useful outcome.
 8. **Estimate honestly:** give size classes (S/M/L) with the main uncertainty, not false precision. If it does not fit a reviewable stack, recommend splitting the ticket or running a spike first.
 
 ## Definition of Ready
@@ -36,6 +36,12 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
 - [ ] Slices ordered; first slice small and reviewable
 - [ ] Open questions have owners; no blocking unknowns
 
+## Decision
+End with one decision and the reason. Suggest it; do not apply tracker labels or change ticket status unless explicitly asked.
+- `implement`: passes Definition of Ready; the first slice can start.
+- `blocked`: waiting on something outside the work itself (API/contract, design, another team, environment). Name the blocker and who can unblock it.
+- `need-human`: needs a product, architecture or priority decision, or the ticket is too ambiguous or large (route to `angular-architect` or split). State the exact question.
+
 ## Output format
 ```
 ## Refined ticket: <title>
@@ -46,7 +52,7 @@ Acceptance criteria: (Given/When/Then)
 Slices (ordered): 1. goal - areas - test - size  ...
 Risks and dependencies: 
 Out of scope / follow-ups:
-Definition of Ready: ready | not ready - blockers
+Decision: implement | blocked | need-human - reason, blocker or question
 Not verified:
 ```
 Write it to a file or a tracker only if asked.
