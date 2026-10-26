@@ -26,6 +26,7 @@ Goal: get a person from "I have never seen this repo" to "I can make a small, co
 8. **Glossary:** domain terms and internal names used in the code, one line each.
 9. **First contribution path:** 2-3 candidate first tasks sized for one small PR (see `angular-small-pr`): e.g. a missing test, an accessibility fix, a small UI state, a docs correction. For each: files involved, why it is safe, how to verify. Include how to find good tasks (labels, TODOs) without picking one for them.
 10. **Questions to ask the team:** what you could not determine; decisions with no recorded reason; who owns what.
+11. **Suggested project context (optional, propose only):** draft a short `CLAUDE.md`/`AGENTS.md` snippet (about 10 lines) holding only what is specific to this team and verified in the code: state-management choice, folder structure, test runner and style, lint/PR rules, forbidden patterns. Keep Angular API rules out of it, since those belong to the official `angular-developer` skill. Also report whether that skill is installed. Show the snippet in chat; write it to a file only if the human asks.
 
 ## Output format
 ```
@@ -41,6 +42,7 @@ Goal of this guide / reader: ...
 ## 8. Glossary
 ## 9. First contribution options
 ## 10. Open questions
+## 11. Suggested project context snippet (optional)
 ## Not verified
 ```
 Save it to a file (for example `docs/ONBOARDING.md`) only if the human asks; otherwise answer in chat. If the repo already has onboarding docs, say what is stale rather than duplicating them.

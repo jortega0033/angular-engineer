@@ -1,40 +1,23 @@
-# Modern Angular reference
+# Modern Angular reference (index and fallback)
 
-Apply only if the repo's Angular version supports it and the codebase already moves that way. Verify anything marked "check" against the installed version and angular.dev.
+This is a **fallback and index**, not the authority on Angular APIs. Precedence when guidance conflicts:
 
-## Components and state
-- Standalone components/directives/pipes. No new NgModules in a standalone codebase.
-- `input()`, `input.required()`, `output()`, `model()`; `viewChild()`/`contentChild()` signal queries.
-- `signal()`, `computed()`, `linkedSignal()` for state. `effect()` is for side effects (logging, DOM, storage), never to derive state or write signals in loops.
-- `ChangeDetectionStrategy.OnPush`. Check whether the app is zoneless (`provideZonelessChangeDetection()`; its stability depends on the Angular version, so verify in the repo's version) before relying on `NgZone` or zone-patched behavior.
-- `inject()` for DI; `providedIn: 'root'` for app-wide services. Keep components thin; data access lives in services.
-- Built-in control flow: `@if`, `@for (x of xs; track x.id)` (stable unique id, not the index for mutable lists), `@switch`, `@defer` for non-critical UI.
-- Lazy routes via `loadComponent`/`loadChildren`; functional guards/resolvers; `withComponentInputBinding()` for route params as inputs.
+1. **The repo's own conventions and Angular version** (what the code and `package.json` actually use).
+2. **The official `angular-developer` skill** from the Angular team, if installed (look for `.claude/skills/angular-developer/`, `.agents/skills/angular-developer/` or the same under `~/.claude/skills/`). It is maintained by the Angular team and has deep per-topic references; defer to it for API details.
+3. **angular.dev** documentation.
+4. These files, which are short, version-gated reminders written from general knowledge and not verified against every Angular release.
 
-## Async data
-- `HttpClient` with `provideHttpClient(withInterceptors([...]))`. Type responses; map API DTOs to domain types at the edge.
-- `resource()`/`httpResource()` and signal forms: check stability in the repo's version; say so if experimental.
-- Bridge: `toSignal()`, `toObservable()`. Cleanup: `takeUntilDestroyed()` / `DestroyRef`. Prefer `async` pipe or `toSignal` over manual `subscribe`; never nest subscribes.
-- Model request state explicitly: `idle | loading | success(data) | empty | error(message)`.
+If the official skill is not installed, you may suggest the human install it (`npx skills add angular/skills`); do not run installs yourself. If it is installed, suggest `npx skills check` occasionally, since stale skills push agents back to outdated patterns.
 
-## RxJS flattening
-`switchMap` latest wins (search, route-param load). `exhaustMap` ignore while busy (submit/save). `concatMap` ordered queue. `mergeMap` parallel, unordered. Handle errors inside the inner stream (`catchError` on the inner observable) so the outer stream survives. `debounceTime` + `distinctUntilChanged` for typeahead.
+Load only the file you need:
 
-## Forms
-Typed reactive forms (`NonNullableFormBuilder`), validators (sync + async with debounce), show errors after touched/submitted, link errors with `aria-describedby`, set `aria-invalid`, disable submit while pending, surface server-side validation errors on the right fields.
+| Topic | File | Load when |
+|---|---|---|
+| Signals, state, change detection | `references/state-and-signals.md` | Writing component state, inputs/outputs, derived values |
+| Templates, routing, rendering | `references/templates-and-routing.md` | Control flow, `@defer`, routes, guards, lazy loading, images |
+| HTTP and RxJS | `references/http-and-rxjs.md` | Data fetching, interceptors, operators, cancellation, error handling |
+| Forms | `references/forms.md` | Any form, validation, error display |
+| Testing | `references/testing.md` | Writing or fixing tests, choosing a runner pattern |
+| SSR, security, accessibility | `references/ssr-security-a11y.md` | SSR/hydration, HTML rendering, auth tokens, a11y baseline |
 
-## Testing
-- Match the repo's runner (Jasmine/Karma, Jest, Vitest) and helpers.
-- `TestBed.configureTestingModule({ imports: [Cmp], providers: [provideHttpClient(), provideHttpClientTesting()] })`; `fixture.componentRef.setInput('name', v)`; `HttpTestingController` (`expectOne`, `flush`, error flush, `verify()`); `await fixture.whenStable()`; `fixture.detectChanges()`.
-- Query by role/text, not CSS classes. Use component harnesses (Angular Material/CDK) when the repo does.
-- Test behavior and states: happy path, error path, empty/edge. A test that still passes if the feature is deleted is worthless.
-- E2E (Playwright/Cypress): few, critical user journeys; stable selectors (roles, test ids); no sleeps.
-
-## Accessibility baseline
-Semantic elements (`button`, `a`, `label`), keyboard operability and visible focus, errors tied to inputs, live regions for async status, `alt` text, no color-only meaning, focus management after dialogs and route changes.
-
-## Security baseline
-Angular sanitizes by default: never `bypassSecurityTrust*` or `[innerHTML]` with untrusted input; do not build URLs/HTML from user input; keep tokens out of `localStorage` where HttpOnly cookies are feasible (+ XSRF config); never commit secrets or put them in the bundle (anything shipped to the browser is public).
-
-## SSR and hydration (only if the app uses `@angular/ssr`)
-Code that runs on the server must not touch `window`, `document` or `localStorage` directly; use `afterNextRender`/`afterRender`, `isPlatformBrowser`, or injected abstractions. Avoid non-deterministic rendering (random ids, `Date.now()`) that causes hydration mismatches. Never share per-request state in module-level singletons. Validate the host header and never build server-side requests from raw user input.
+Rule for all of them: apply a modern API only if the repo's version supports it **and** the codebase already moves that way; otherwise match the existing style and mention the modern option as a follow-up.

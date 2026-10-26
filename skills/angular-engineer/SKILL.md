@@ -45,15 +45,21 @@ Agents you can delegate bounded work to: `angular-codebase-mapper`, `angular-sco
 **Clarify -> Inspect -> Plan -> Implement -> Test -> Self-review -> Summarize**
 
 1. **Clarify:** the user and goal; one example input -> output; loading/empty/error/slow states; smallest useful slice and what is out of scope; acceptance check; constraints. Restate in five lines (user, behavior, scope, deferred, acceptance) and get confirmation.
-2. **Inspect (read-only):** `@angular/core` version; standalone vs NgModule; zoneless vs zone.js; component style (`input()` vs `@Input()`, `@if/@for` vs `*ngIf`, `inject()` vs constructor DI, OnPush); state approach; test runner; UI library; lint/format; layout and naming; how to run app and tests. Trace one interaction (route -> component -> service -> HTTP -> state -> template) in five lines. End with "Conventions I will follow". For a big or unfamiliar repo use `angular-onboard`.
+2. **Inspect (read-only):** `@angular/core` version; standalone vs NgModule; zoneless vs zone.js; component style (`input()` vs `@Input()`, `@if/@for` vs `*ngIf`, `inject()` vs constructor DI, OnPush); state approach; test runner; UI library; lint/format; layout and naming; how to run app and tests. Note whether the official `angular-developer` skill is installed (see "Layering"). Trace one interaction (route -> component -> service -> HTTP -> state -> template) in five lines. End with "Conventions I will follow". For a big or unfamiliar repo use `angular-onboard`.
 3. **Plan:** files to touch, data shape, where state lives, tests to add, what is deferred, and a size estimate (lines/files). Get a go-ahead for anything bigger than one component plus one service; use `angular-small-pr` if it is not clearly small.
 4. **Implement:** typed model -> data access -> component state -> template -> styling last. Happy path first, then loading/empty/error.
-5. **Test:** add the test that proves the behavior in the repo's style; run it, then the wider suite if fast. Patterns: `references/modern-angular.md`.
+5. **Test and build:** add the test that proves the behavior in the repo's style; run it, then the wider suite if fast. After code changes in the user's own repo, also run the repo's build (`ng build` or its script) and fix compile errors before presenting; this is the cheapest check that generated code compiles. Respect the untrusted-code rule and say if you skipped it. Patterns: `references/testing.md`.
 6. **Self-review:** read your own diff against the `angular-review` checklist; run `angular-scope-reviewer` for non-trivial changes. Fix real problems; list the rest.
 7. **Summarize:** what users can now do and why it matters; what was deferred and why; how we would know it works in production; risks and follow-ups.
 
 ## Definition of done
 Behavior matches the confirmed scope; tests cover happy path, one error path and one edge case; lint/build/tests pass or failures are explained; accessibility basics checked; no unrelated changes; the human can explain every line kept.
 
-## Reference
-Modern Angular patterns, RxJS operator choice, forms, HTTP state, testing, SSR notes: `references/modern-angular.md`. Apply only what the repo's version supports and already uses.
+## Layering with the official Angular skill
+This plugin is the **workflow and safety layer**. The **Angular team's official `angular-developer` skill** (github.com/angular/skills) is the **API layer**: deep, maintained references for signals, forms, DI, routing, SSR, testing and migrations. During Inspect, check whether it is installed (`.claude/skills/angular-developer/`, `.agents/skills/angular-developer/`, or under `~/.claude/skills/`).
+- **Installed:** defer to it for Angular API details; follow this plugin for workflow, safety, sizing and review. Precedence: the repo's conventions and version, then the official skill, then angular.dev, then our fallback references.
+- **Not installed:** use the fallback references below, and you may suggest the human install it (`npx skills add angular/skills`). Do not run the install yourself. Suggest `npx skills check` now and then; stale skills regress agents to outdated patterns.
+- Scaffold with the Angular CLI (`ng generate ...`) when the repo uses it, so structure stays consistent.
+
+## Reference (fallback, loaded on demand)
+`references/modern-angular.md` is the index; load only the file for the task (state and signals, templates and routing, HTTP and RxJS, forms, testing, SSR/security/accessibility). Apply only what the repo's version supports and already uses.

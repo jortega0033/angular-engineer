@@ -31,6 +31,17 @@ One idea runs through it: **the human decides, the agent does the legwork and sh
 
 New to some of the terms? See [`docs/glossary.md`](docs/glossary.md).
 
+## How this fits with the official Angular skill
+
+The Angular team publishes an official `angular-developer` skill ([angular/skills](https://github.com/angular/skills)) with deep, maintained references for signals, forms, DI, routing, SSR, testing and migrations. **This plugin does not try to replace it.** The split:
+
+- **Official skill = Angular API layer** (what modern code looks like, per version).
+- **This plugin = workflow and safety layer** (onboarding, architecture decisions, small-PR sizing, review, modernization, shipping, and rules for what an agent may do).
+
+If the official skill is installed, our skills defer to it for API details. If not, a short on-demand fallback lives in `skills/angular-engineer/references/`. Precedence: the repo's own conventions and version, then the official skill, then angular.dev, then our fallback. To add it: `npx skills add angular/skills` (your call to run). Keep it fresh with `npx skills check`.
+
+Related community work reviewed while designing this (as references only, nothing copied): [jeffallan/claude-skills angular-architect](https://github.com/jeffallan/claude-skills/blob/main/skills/angular-architect/SKILL.md) and the angular.love article [Implementing the Official Angular Claude Skills](https://angular.love/implementing-the-official-angular-claude-skills).
+
 ## Install
 
 **Claude Code plugin (recommended):**

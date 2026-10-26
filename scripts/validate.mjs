@@ -89,6 +89,8 @@ for (const a of agents) {
 
 // cross references: backticked skill/agent names and reference paths
 const known = new Set([...skills, ...agents.map((a) => a.replace(/\.md$/, ''))]);
+// External skills we reference but do not ship (official Angular team skill).
+const EXTERNAL = new Set(['angular-developer']);
 function walk(dir) {
   return readdirSync(dir).flatMap((n) => {
     if (n === '.git' || n === 'node_modules') return [];
@@ -103,7 +105,7 @@ for (const f of walk(root)) {
     if (p && !existsSync(resolve(dirname(f), p))) fail(`${rel(f)}: broken link ${m[1]}`);
   }
   for (const m of t.matchAll(/`(?:angular-engineer:)?(angular-[a-z0-9-]+)`/g)) {
-    if (!known.has(m[1]) && !rel(f).startsWith('docs/practice')) fail(`${rel(f)}: references unknown skill/agent "${m[1]}"`);
+    if (!known.has(m[1]) && !EXTERNAL.has(m[1]) && !rel(f).startsWith('docs/practice')) fail(`${rel(f)}: references unknown skill/agent "${m[1]}"`);
   }
   for (const m of t.matchAll(/`(references\/[A-Za-z0-9_./-]+\.md|docs\/(?:glossary|cheatsheet|practice-drill)\.md)`/g)) {
     const ok = existsSync(resolve(dirname(f), m[1])) || existsSync(resolve(root, m[1])) || existsSync(resolve(root, 'skills/angular-engineer', m[1]));
