@@ -28,6 +28,16 @@ If the change comes from a fork or an unknown author, or you cannot tell the rep
 
 Phrase as: "Here X can happen, which causes Y for the user. Suggest Z." Do not demand rewrites for taste. Group nits; do not flood.
 
+## Order of work for a whole PR
+Review a PR as a story, not as an alphabetical file list.
+1. **Intent first (about 2 minutes):** read the description, the linked ticket and the commit messages in order. A history of "wip" and "fix fix" commits suggests the author has no clear model of their own change: say so as a first comment.
+2. **Triage by risk:** sort files, before reading them, into core logic (why the PR exists), plumbing (imports, config, types) and noise (formatting, generated code). Spend attention on the core and glance at the rest. A one-line change in auth middleware outranks 200 lines of new tests.
+3. **Behavior before code:** if rule 3 lets you run the branch (the human's own repo), run it first and judge whether the behavior makes sense; otherwise review statically and say "not run".
+4. **Questions for the core:** does it do what the ticket says, unhappy paths included? What is the blast radius: what else calls this, and what should have changed but did not (a caller, a migration, a type)? Do the tests prove behavior, checked against the ticket and not against the code? How hard is it to undo (migrations, infrastructure and API contracts get double attention)?
+5. **Comments:** prefix each with blocking, question or nit; describe the user-facing behavior ("this charges twice on retry"), not taste; say what is good. Skip naming and formatting, which is the linter's job. Explain each finding in one plain line (what can go wrong, what the user sees) so a reader new to reviewing can learn from it.
+
+If the author is an AI agent, also check: invented conventions (a new helper, pattern or dependency where the repo already has one: search before accepting); tests built on the same misunderstanding as the code (check them against the ticket, and cover edge cases the ticket never mentions); what is missing rather than what is present; over-building (extra abstraction layers, config nobody asked for, defensive code for impossible states), where "remove this" is the most common comment. You give findings and a suggested verdict; the human decides whether to approve, because approval is their accountability.
+
 ## Checklist
 
 **Security**
