@@ -24,6 +24,14 @@ function frontmatter(file) {
   return o;
 }
 
+// A plain (unquoted) YAML scalar breaks strict parsers if it contains ": " or " #".
+function plainScalarProblem(v) {
+  if (!v || /^["']/.test(v)) return null;
+  if (v.includes(': ')) return 'contains ": " in an unquoted value (strict YAML would reject it)';
+  if (v.includes(' #')) return 'contains " #" in an unquoted value (YAML would treat it as a comment)';
+  return null;
+}
+
 // manifests
 let plugin, market;
 for (const [f, set] of [['.claude-plugin/plugin.json', (v) => (plugin = v)], ['.claude-plugin/marketplace.json', (v) => (market = v)]]) {
@@ -54,6 +62,7 @@ for (const d of skills) {
   if (!NAME_RE.test(fm.name ?? '') || fm.name.length > 64) fail(`skills/${d}/SKILL.md: invalid name "${fm.name}"`);
   if (fm.name !== d) fail(`skills/${d}/SKILL.md: name "${fm.name}" must equal folder "${d}"`);
   if (!fm.description || fm.description.length < 40 || fm.description.length > 1024) fail(`skills/${d}/SKILL.md: description must be 40-1024 chars`);
+  { const p = plainScalarProblem(fm.description); if (p) fail(`skills/${d}/SKILL.md: description ${p}`); }
   const body = read(file);
   if (body.split('\n').length > 200) fail(`skills/${d}/SKILL.md: over 200 lines (move detail to references/)`);
   if (d !== 'angular-engineer' && !body.includes('angular-engineer') ) fail(`skills/${d}/SKILL.md: must reference the safety rules in angular-engineer`);
@@ -73,6 +82,7 @@ for (const a of agents) {
   const name = a.replace(/\.md$/, '');
   if (fm.name !== name || !NAME_RE.test(fm.name)) fail(`agents/${a}: name "${fm.name}" must equal filename`);
   if (!fm.description) fail(`agents/${a}: missing description`);
+  { const p = plainScalarProblem(fm.description); if (p) fail(`agents/${a}: description ${p}`); }
   const tools = (fm.tools ?? '').split(',').map((s) => s.trim()).filter(Boolean);
   if (!tools.length) { fail(`agents/${a}: tools must be set explicitly (least privilege)`); continue; }
   for (const t of tools) if (!TOOLS.has(t)) fail(`agents/${a}: unknown tool "${t}"`);

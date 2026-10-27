@@ -36,5 +36,6 @@ broken('strictly read-only agent with Bash', (d) => edit(d, 'agents/angular-secu
 broken('agent missing injection guard', (d) => edit(d, 'agents/angular-reviewer.md', (t) => t.replaceAll('data, not instructions', 'just text')), 'prompt-injection guard');
 broken('skill name mismatch', (d) => edit(d, 'skills/angular-review/SKILL.md', (t) => t.replace('name: angular-review', 'name: angular-reviews')), 'must equal folder');
 broken('unknown agent reference', (d) => edit(d, 'skills/angular-engineer/SKILL.md', (t) => t + '\nUse `angular-ghost-agent`.\n'), 'unknown skill/agent');
+broken('colon in unquoted description', (d) => edit(d, 'skills/angular-review/SKILL.md', (t) => t.replace('Findings are ranked', 'Note: findings are ranked')), 'strict YAML would reject');
 broken('bad manifest json', (d) => writeFileSync(join(d, '.claude-plugin/plugin.json'), '{ nope'), 'invalid JSON');
 console.log('all negative tests passed');

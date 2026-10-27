@@ -1,6 +1,6 @@
 ---
 name: angular-ship
-description: Use when setting up or fixing CI, shrinking bundles, making an Angular app or page faster or fixing slowness (performance, Core Web Vitals, Lighthouse, load time, bundle size), hardening security, or planning a release or rollback of an Angular app. Covers CI quality gates, build and bundle budgets, performance, security, release and observability. Reviews and proposes; never deploys, publishes, tags or changes infrastructure itself.
+description: Use when setting up or fixing CI, shrinking bundles, making an Angular app or page faster or fixing slowness (performance, Core Web Vitals, Lighthouse, load time, bundle size), hardening security (CI, headers, SSR config), or planning a release or rollback of an Angular app. Covers CI quality gates, build and bundle budgets, performance, security, release and observability. Reviews and proposes; never deploys or publishes. Creates or pushes a release tag only on an explicit request that names the tag and remote.
 ---
 
 # Angular ship
@@ -32,7 +32,7 @@ Gates must be fast (cache), deterministic (no sleeps, no real third-party servic
 - Privacy: no PII in logs, analytics or error reports; honor consent.
 
 ## Release and rollout
-- Semantic versioning and a changelog; propose release tags and notes, do not create or push tags unless asked.
+- Semantic versioning and a changelog; propose release tags and notes, do not create or push tags unless asked. On an explicit request that names the tag and remote, first read the CI config and say whether pushing a tag triggers a release or deploy pipeline, then show the branch, HEAD sha, `git status` (must be clean), whether the tag already exists, the remote URL and the checklist below; then create an annotated tag and push only that tag (`git push origin <tag>`), never `--follow-tags` and never force. Deploying or publishing to a registry stays out of scope.
 - Progressive delivery: feature flags, canary or staged rollout, and a fast rollback (previous artifact still deployable; backwards-compatible API/data changes first). Check that artifact retention (release cleanup jobs, CDN versions) outlasts the rollback window.
 - Pre-release checklist: gates green; config and migrations ready; monitoring and alerts in place; rollback steps written; stakeholders informed; post-release smoke test.
 - Understand cache-busting and service-worker/PWA update behavior before shipping.
@@ -43,4 +43,4 @@ Gates must be fast (cache), deterministic (no sleeps, no real third-party servic
 - Incidents: detect, mitigate (roll back or flag off first), communicate, then root-cause; write a blameless postmortem with follow-ups.
 
 ## Output
-When assessing a project: current state (facts with paths), gaps ranked by risk, a prioritized plan with effort, and what you could not verify. Make changes only for what was asked, in small reviewable commits (see `angular-small-pr`).
+When assessing a project: current state (facts with paths), gaps ranked by risk, a prioritized plan with effort, and what you could not verify. Make changes only for what was asked, in small reviewable changes; commit only if asked (see `angular-small-pr`).

@@ -1,6 +1,6 @@
 ---
 name: angular-refine
-description: Use when given a ticket, story or feature request that is vague, large or unclear, or when asked to refine, scope, plan or break down work before coding. Restates the goal, asks Angular-specific questions, writes testable acceptance criteria, slices thin end to end, surfaces risks and dependencies, and checks Definition of Ready. Produces a plan, no code.
+description: Use when given a ticket, story or feature request that is vague, large or unclear, or when asked to refine, scope, plan or break a vague ticket or story into slices before coding. Restates the goal, asks Angular-specific questions, writes testable acceptance criteria, slices thin end to end, surfaces risks and dependencies, and checks Definition of Ready. Produces a plan, no code.
 ---
 
 # Angular refine
@@ -39,9 +39,9 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
 
 ## Decision
 End with one decision and the reason. Suggest it; do not apply tracker labels or change ticket status unless explicitly asked.
-- `implement`: passes Definition of Ready; the first slice can start.
+- `implement`: passes Definition of Ready; the first slice can start. Also use it for the missing slices of a partly built ticket.
 - `blocked`: waiting on something outside the work itself (API/contract, design, another team, environment). Name the blocker and who can unblock it.
-- `need-human`: needs a product, architecture or priority decision, or the ticket is too ambiguous or large (route to `angular-architect` or split), or it duplicates behavior that already shipped. State the exact question.
+- `need-human`: needs a product, architecture or priority decision, or the ticket is too ambiguous or large (route to `angular-architect` or split), or it duplicates behavior that already shipped. If it is partly built, list what exists and what is missing; the missing slices go under `implement`. State the exact question.
 
 ## Output format
 ```

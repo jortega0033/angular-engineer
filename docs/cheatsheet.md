@@ -75,7 +75,7 @@ Typed controls (`NonNullableFormBuilder`) -> validators -> label per input -> er
 
 `loading` / `data` / `empty` / `error` as separate states -> user-visible error message -> retry -> no stuck spinner -> cancel stale requests.
 
-## Review in 5 passes (rank by impact)
+## Review in passes 0-4 (rank by impact)
 
 0. **Security and data loss first:** XSS sinks, secrets, auth, anything that destroys data.
 1. **Correctness:** does it do what the request says? edge cases?

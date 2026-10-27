@@ -1,6 +1,6 @@
 ---
 name: angular-small-pr
-description: Use whenever the user asks "how big is this change", "one PR or several", "how should I split this", "is this too big", or is about to start a non-trivial Angular change, prepare commits, or write a pull request. Invoke this skill first instead of estimating ad hoc. Keeps the change small enough for a human to review properly. Estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission.
+description: Use whenever the user asks "how big is this change", "one PR or several", "how should I split this code change into PRs or commits", "is this too big", or is about to prepare commits or write a pull request. Invoke this skill first instead of estimating ad hoc. Keeps the change small enough for a human to review properly. Estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission.
 ---
 
 # Angular small PR
@@ -43,7 +43,7 @@ Before presenting, run `git diff --stat` (and `git diff --shortstat origin/<base
 ## 5. Commits and PR
 - Atomic commits, each doing one thing and revertable alone; conventional messages (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`) unless the repo uses another convention.
 - Propose branching from the latest base with a short, descriptive name; create the branch only when asked.
-- **The human owns publishing.** Commit locally only if asked; invoking this skill is not that request. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. If force is ever needed on your own unshared branch, `--force-with-lease`, and only when asked.
+- **The human owns publishing.** Commit locally only if asked; invoking this skill is not that request. "Prepare", "plan", "slice" or "propose" commits means list the commit boundaries, messages and the exact `git add`/`git commit` commands, and run none of them. Create commits only on "make/create the commits" or "commit it"; if unsure, ask once. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. If force is ever needed on your own unshared branch, `--force-with-lease`, and only when asked.
 - PR description (use the repo's template if it exists; otherwise):
 ```
 ## Summary
