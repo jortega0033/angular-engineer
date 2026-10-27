@@ -62,9 +62,18 @@ Skills are then available as `/angular-engineer:angular-architect` and so on. Pl
 Angular workflow (angular-engineer plugin):
 - Vague or large ticket -> /angular-engineer:angular-refine before coding
 - Starting a non-trivial change or PR -> /angular-engineer:angular-small-pr
+- Building or fixing a feature -> /angular-engineer:angular-engineer
 - Before merge, or responding to review comments -> /angular-engineer:angular-review
 - New to this repo -> /angular-engineer:angular-onboard
 ```
+
+**One-prompt setup (sample):** paste this into Claude Code inside the project. Claude runs the install commands (it asks permission for each shell command), then onboards and proposes the `CLAUDE.md` changes. If the skills do not show up right after installing, restart Claude Code and send only the second sentence.
+
+```
+Install the Claude Code plugin from https://github.com/jortega0033/angular-engineer by following the Install section of its README. Then onboard me to this project and set up CLAUDE.md using the angular-onboard skill. Show me the repo map and the CLAUDE.md diff first, and wait for my approval before writing anything.
+```
+
+Installing never touches `CLAUDE.md`; the write happens only in `angular-onboard` setup mode, after you approve the diff.
 
 **Manual:** copy `skills/*` to `.claude/skills/` and `agents/*.md` to `.claude/agents/` (project) or the same folders under `~/.claude/` (user).
 
