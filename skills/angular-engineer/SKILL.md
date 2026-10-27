@@ -1,6 +1,6 @@
 ---
 name: angular-engineer
-description: Use when asked to implement, build, add or fix a feature or bug in an existing Angular codebase. Careful, collaborative workflow - clarify, inspect, plan, implement a small slice, test, self-review, summarize - and routes to the other angular-* skills (refine, onboard, architect, small-pr, review, modernize, ship).
+description: Use whenever the user asks to add, change, build, implement or fix something in an existing Angular codebase, even a small change. Invoke this skill first, before editing any file. Careful, collaborative workflow - clarify, inspect, plan, implement a small slice, test, self-review, summarize - and routes to the other angular-* skills (refine, onboard, architect, small-pr, review, modernize, ship).
 ---
 
 # Angular engineer (core)

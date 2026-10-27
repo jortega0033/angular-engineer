@@ -1,6 +1,6 @@
 ---
 name: angular-small-pr
-description: Use before starting any non-trivial Angular change, and when preparing commits or a pull request, to keep the change small enough for a human to review properly. Estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission.
+description: Use whenever the user asks "how big is this change", "one PR or several", "how should I split this", "is this too big", or is about to start a non-trivial Angular change, prepare commits, or write a pull request. Invoke this skill first instead of estimating ad hoc. Keeps the change small enough for a human to review properly. Estimates diff size first, slices work into one PR or a dependency-ordered stack, refuses or pre-scopes work that will not fit, checks the real diff against the estimate, and writes the PR description. Never pushes or opens a PR without explicit permission.
 ---
 
 # Angular small PR

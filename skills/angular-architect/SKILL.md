@@ -1,6 +1,6 @@
 ---
 name: angular-architect
-description: Use when designing an Angular feature or system, choosing state management, structuring folders, libraries or a monorepo, defining boundaries, planning API and auth integration, assessing risk, or writing an architecture decision record (ADR). Evidence-first, trade-off driven, and deliberately anti-over-engineering. Produces a design, not the implementation.
+description: Use whenever the user asks "should we use X or Y", "how should we structure this", "which state management", "write up a recommendation", or wants a design, trade-off analysis or architecture decision record (ADR) for an Angular feature or system - state management, folders, libraries, monorepo, boundaries, API and auth integration, risk. Invoke this skill first instead of answering ad hoc. Evidence-first, trade-off driven, and deliberately anti-over-engineering. Produces a design, not the implementation.
 ---
 
 # Angular architect
