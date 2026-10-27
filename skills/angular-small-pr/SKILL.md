@@ -38,7 +38,7 @@ Tests belong in the same PR as the behavior they prove.
 - Ambiguous request: ask for the smaller interpretation first.
 
 ## 4. Check the real diff against the estimate
-Before presenting, run `git diff --stat` (and `git diff --shortstat origin/<base>...`). If lines or files exceed the estimate by more than 50%, or the actual diff crosses a tier boundary above, **stop**: report predicted vs actual, say why, and propose a split. Do not quietly open an oversized PR.
+Before presenting, run `git status --short` and `git diff --stat HEAD`. Untracked files are not in `git diff`: count them as `angular-scope-reviewer` step 1 does (`git ls-files --others --exclude-standard`, skipping secret-looking names, then their line counts), or run that agent. `git diff --shortstat origin/<base>...` sees commits only. If lines or files exceed the estimate by more than 50%, or the actual diff crosses a tier boundary above, **stop**: report predicted vs actual, say why, and propose a split. Do not quietly open an oversized PR.
 
 ## 5. Commits and PR
 - Atomic commits, each doing one thing and revertable alone; conventional messages (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`) unless the repo uses another convention.
