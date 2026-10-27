@@ -47,7 +47,7 @@ End with one decision and the reason. Suggest it; do not apply tracker labels or
 ## Refined ticket: <title>
 Goal / user / success:
 Context found in the repo (paths):
-Open questions (owner): 
+Open questions (owner) - proposed default - reversible? - accepted?: 
 Acceptance criteria: (Given/When/Then)
 Slices (ordered): 1. goal - areas - test - size  ...
 Risks and dependencies: 

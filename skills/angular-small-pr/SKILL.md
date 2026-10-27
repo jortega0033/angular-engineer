@@ -18,6 +18,8 @@ Predict **changed lines** (added + removed, excluding lockfiles and generated fi
 | <= 400 lines and <= 20 files | A dependency-ordered **stack of 2-4 PRs**; each independently reviewable, testable and revertable. Present the stack and get approval before starting. |
 | Above that, or no clean layering at any size | **Do not start.** Say "too big for one reviewable change", give the estimate and a proposed split or pre-scoping questions (spike, design doc/ADR, feature flag plan), and hand back to the human. Refusing is a valid outcome, not a failure. |
 
+If the whole ticket is in the third row but refines into slices (see `angular-refine`), refuse it as one change and size each slice on its own with this table; each slice may be a single PR or its own stack. Do not stretch one stack past 4 PRs.
+
 ## 2. How to slice Angular work
 Prefer vertical slices: PR 1 is the thinnest user-visible path (behind a flag if incomplete), later PRs widen it. When the work cannot be sliced that way, layer it so each PR builds, passes tests and can ship alone (behind a flag if user-visible):
 1. Types/models and API client or service (+ its tests), no UI wired yet.
