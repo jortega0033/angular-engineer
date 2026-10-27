@@ -21,7 +21,7 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
    - *Release:* feature flag, rollout, analytics/events, rollback, browser/device support.
    - *Scope:* what is explicitly out; what can wait for a follow-up; deadline and fixed constraints.
 4. **Acceptance criteria:** short, testable, user-visible. Prefer Given/When/Then; cover happy path, empty, error and permission cases. Each criterion maps to a test or a manual check.
-5. **Slice vertically:** thin end-to-end slices that each ship user-visible value or sit behind a flag, ordered by dependency and risk (riskiest unknown first, or a time-boxed spike). The first slice is the thinnest working path from UI to data (for example one field end to end); later slices widen it with loading/empty/error states, edge cases and polish. For each slice: goal, files/areas, test, rough size class. Hand exact sizing and PR stacking to `angular-small-pr`; hand structural or state-management questions to `angular-architect`.
+5. **Slice vertically:** thin end-to-end slices that each ship user-visible value or sit behind a flag, ordered by dependency and risk (riskiest unknown first, or a time-boxed spike). The first slice is the thinnest working path from UI to data (for example one field end to end); later slices widen it with loading/empty/error states, edge cases and polish. For each slice: goal, files/areas, test, rough size class. If the human fixed an order (for example API first), keep it and name the first user-visible slice. Hand exact sizing and PR stacking to `angular-small-pr`; hand structural or state-management questions to `angular-architect`.
 6. **Risks, dependencies, assumptions:** list each with an owner and how to reduce it (spike, mock, question to the PM/backend/design, flag). Name anything irreversible.
 7. **Definition of Ready check** (below), then the **Decision**. If not ready, say exactly what blocks it and who can unblock it. Refusing to call a ticket ready is a valid, useful outcome.
 8. **Estimate honestly:** give size classes (S/M/L) with the main uncertainty, not false precision. If it does not fit a reviewable stack, recommend splitting the ticket or running a spike first.
@@ -58,6 +58,6 @@ Not verified:
 Write it to a file or a tracker only if asked.
 
 ## Guardrails
-- Do not invent requirements; unknowns become questions, not assumptions in the plan.
+- Do not invent requirements; unknowns become questions. If nobody can answer now, put a proposed default beside each question, mark it reversible or not, and choose `implement` only when every default is reversible.
 - Do not pick a design or library here; flag the decision and route it to `angular-architect`.
 - Keep the plan short enough to read in one sitting; detail belongs in the slices, not in prose.

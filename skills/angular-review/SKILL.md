@@ -32,8 +32,9 @@ Phrase as: "Here X can happen, which causes Y for the user. Suggest Z." Do not d
 - Mutation of inputs/shared state; signal writes inside `computed`; `effect()` deriving state or looping.
 - `@for` without stable `track`, or `track $index` on reorderable data.
 - `any`, unchecked `!`, unsafe casts, untyped `HttpClient` responses; DTOs leaking into templates.
-- Double submit; no pending/disabled state; optimistic updates without rollback.
-- Hand-rolled date/number/currency/locale formatting.
+- Double submit; no pending/disabled state; navigation or edits allowed while an action is in flight; optimistic updates without rollback.
+- Hand-rolled date/number/currency/locale formatting; week/day boundaries and timezone or DST arithmetic (calendar vs elapsed time, UTC vs local, picking records by start vs by overlap).
+- The same diff changes the backend: review its validation, transactions, auth and date logic too, or list it under Not verified.
 - SSR/hydration (only if the app uses SSR or prerender): browser-only globals (`window`, `document`, `localStorage`) outside guarded/`afterNextRender` code; non-deterministic rendering causing hydration mismatches.
 
 **Error and state handling**
