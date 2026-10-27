@@ -1,6 +1,6 @@
 ---
 name: angular-review
-description: Use when asked to review an Angular diff, PR or component, check a change before merge, audit code quality, respond to review comments on your own PR, or run a review-fix-re-review cycle. Findings are ranked by impact (security, correctness, data races, errors, accessibility, performance, tests) with a walkthrough and proportionate fixes.
+description: Use whenever the user says "review", "look over", "check this before I merge", "is this OK", "find problems in", or "audit" some Angular code, a diff, a PR or a component, or asks to respond to review comments or run a review-fix-re-review cycle. Invoke this skill first instead of reviewing ad hoc. Findings are ranked by impact (security, correctness, data races, errors, accessibility, performance, tests) with a walkthrough and proportionate fixes.
 ---
 
 # Angular review
