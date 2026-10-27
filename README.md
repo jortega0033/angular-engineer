@@ -103,7 +103,7 @@ Review my current diff with angular-review, and run angular-security-auditor and
 Review this PR with angular-review: https://github.com/<owner>/<repo>/pull/<n>
 ```
 
-For a PR link the skill reads it with `gh pr view` and `gh pr diff` (read-only, no checkout). If `gh` is missing or not signed in, it asks you to paste the diff or run `gh auth login` yourself. It never posts, approves or merges.
+For a PR link the skill reads it with `gh pr view` and `gh pr diff` (read-only, no checkout). If `gh` is missing or not signed in, it asks you to paste the diff or run `gh auth login` yourself. It never posts, approves or merges unless you ask.
 
 ## Safety defaults
 
