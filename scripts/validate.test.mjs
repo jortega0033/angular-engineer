@@ -14,7 +14,7 @@ function run(dir) {
 function broken(label, mutate, expect) {
   const dir = mkdtempSync(join(tmpdir(), 'ae-validate-'));
   try {
-    cpSync(root, dir, { recursive: true, filter: (s) => !s.includes('.git') });
+    cpSync(root, dir, { recursive: true, filter: (s) => !/[\\/]\.git([\\/]|$)/.test(s) });
     mutate(dir);
     const r = run(dir);
     if (r.status === 0) throw new Error(`${label}: validator passed but should have failed`);

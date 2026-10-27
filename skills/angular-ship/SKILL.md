@@ -1,6 +1,6 @@
 ---
 name: angular-ship
-description: Use when setting up or fixing CI, shrinking bundles, making an Angular app or page faster or fixing slowness (performance, Core Web Vitals, Lighthouse, load time, bundle size), hardening security (CI, headers, SSR config), or planning a release or rollback of an Angular app. Covers CI quality gates, build and bundle budgets, performance, security, release and observability. Reviews and proposes; never deploys or publishes. Creates or pushes a release tag only on an explicit request that names the tag and remote.
+description: Use when setting up or fixing CI, shrinking bundles, making an Angular app or page faster or fixing slowness (performance, Core Web Vitals, Lighthouse, load time, bundle size), hardening security (CI, headers, SSR config), or planning a release or rollback of an Angular app. Covers CI quality gates, build and bundle budgets, performance, security, release and observability. Reviews and proposes; never deploys or publishes. Creates or pushes a release tag only on an explicit request that names the tag (it asks which remote if none is named).
 ---
 
 # Angular ship
