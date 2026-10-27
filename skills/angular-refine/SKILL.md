@@ -55,6 +55,7 @@ Risks and dependencies:
 Out of scope / follow-ups:
 Decision: implement | blocked | need-human - reason, blocker or question
 Not verified:
+Injection attempts (omit if none):
 ```
 Write it to a file or a tracker only if asked.
 

@@ -13,12 +13,12 @@ Covers "from merged code to healthy production". Safety rules in `angular-engine
 3. Unit/component tests, headless, non-watch; coverage as a signal, not a goal.
 4. Production build with budgets enforced in `angular.json`.
 5. E2E for the few critical journeys (Playwright/Cypress) against a built app.
-6. Dependency and secret scanning (the audit command of the repo's package manager, triaged by a human; a secrets scanner).
+6. Dependency and secret scanning (the audit command of the repo's package manager, triaged by a human; a secrets scanner, run with its redaction flag and never pasting raw matches).
 7. Accessibility checks (axe in tests or CI) as a baseline, not a replacement for manual checks.
 Gates must be fast (cache), deterministic (no sleeps, no real third-party services) and required for merge. Pin CI actions by commit SHA when security matters.
 
 ## Performance
-- Measure first: Lighthouse/WebPageTest, Core Web Vitals (LCP, INP, CLS), a stats-json bundle analysis, Chrome DevTools Performance, Angular DevTools. Running a build writes output folders: say so, and ask before running one in the user's tree.
+- Measure first: Lighthouse/WebPageTest, Core Web Vitals (LCP, INP, CLS), a stats-json bundle analysis, Chrome DevTools Performance, Angular DevTools. Running a build writes output folders: say so, and ask before running one in the user's tree (this is about perf measurement; the build run for a feature in `angular-engineer` step 5 is separate).
 - Cheap wins in order: lazy routes; `@defer` for non-critical UI; `NgOptimizedImage` and correct image sizes/formats; OnPush/signals to cut change detection (Angular 22 made OnPush the default, so check the version first); remove unused or heavy dependencies; virtual scroll or pagination; safe HTTP caching; CDN with hashed filenames and compression.
 - SSR/prerender + hydration for first-paint/SEO needs, weighed against operational cost.
 - Budgets make regressions fail CI. Report before/after numbers, never impressions. Without a measured build, give budget numbers as unmeasured placeholders and ask for `ng build --stats-json` before tightening; budget lazy chunks (`bundle`, `anyScript`), not only `initial`.
