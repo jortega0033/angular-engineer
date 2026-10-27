@@ -9,8 +9,8 @@ Migrations are risky mainly because they are large. Make them **small, verified 
 
 ## Rules
 - **Dirty tree: stop and ask.** Never stash, reset or clean the user's changes. Work on a branch only if the human asks you to create one; otherwise propose the branch name and wait.
-- **Baseline first:** install, build, lint, run tests; record pre-existing failures. If you cannot get a baseline, stop and report.
-- **One migration per commit/PR** (see `angular-small-pr`) so each reverts alone. Rollback = `git revert <commit>` or discarding the unmerged branch, never `reset --hard` on shared work.
+- **Baseline first:** on a repo you may run code from (the human's own, or approved this session; `--ignore-scripts` does not make tests or builds safe), install, build, lint and run tests; record pre-existing failures. If you cannot get a baseline, stop and report.
+- **One migration per commit/PR** (see `angular-small-pr`) so each reverts alone. Propose the commit split; commit only when the human asks. Rollback = `git revert <commit>` or discarding the unmerged branch, never `reset --hard` on shared work.
 - **Official automation first.** Use `ng update` and the Angular-provided schematics; review their diff. Do not hand-edit what a schematic does. Pass explicit options (paths, flags) so nothing prompts interactively; if a command asks questions, stop and ask the human.
 - **One major version at a time.** Read the update guide (angular.dev/update-guide) for the exact from/to path and the Node, TypeScript and RxJS requirements, and release notes for breaking changes.
 - **Peer dependency conflicts:** resolve deliberately. `--force`/`--legacy-peer-deps` only with the human's approval and a note in the summary.
@@ -20,7 +20,7 @@ Migrations are risky mainly because they are large. Make them **small, verified 
 
 ## Process
 1. **Assess:** Angular, Node, TypeScript, RxJS and key library versions; NgModule vs standalone; zone.js; test runner; deprecated API usage; library peer limits; size of the surface (modules, components using old patterns). Present a short ordered plan with risk and effort.
-2. **Upgrade versions:** `ng update @angular/core@<next> @angular/cli@<next>`, then Material/CDK and other libraries as needed. Commit each major step separately.
+2. **Upgrade versions:** `ng update @angular/core@<next> @angular/cli@<next>`, then Material/CDK and other libraries as needed. Plan each major step as its own commit.
 3. **Modernize patterns** (only those the target version supports; see angular.dev "migrations" for the current schematics and their options):
    - NgModules -> standalone (documented multi-step schematic).
    - `*ngIf/*ngFor/*ngSwitch` -> `@if/@for/@switch` (review the `track` expressions it adds).

@@ -3,7 +3,7 @@
 Version-gated: verify in the repo's Angular version. The official `angular-developer` skill wins on API details.
 
 **Templates**
-- Built-in control flow `@if`, `@for (x of xs; track x.id)`, `@switch`, `@empty` blocks. `track` needs a stable unique id; avoid the index on reorderable lists. If the repo still uses `*ngIf/*ngFor`, follow it and propose a migration separately (`angular-modernize`).
+- Built-in control flow `@if`, `@for (x of xs; track x.id)`, `@switch`, `@empty` blocks. `track` needs a stable unique id; avoid the index on reorderable lists. `*ngIf/*ngFor/*ngSwitch` are deprecated since Angular 20; if the repo still uses them, follow it and propose a migration separately (`angular-modernize`).
 - `@defer` for non-critical or below-the-fold UI, with an explicit placeholder/loading/error state; check trigger options in the version.
 - `@let` for template-local values where available; check the version.
 - Prefer pipes for formatting in templates; avoid calling heavy functions in templates (use `computed()`).
@@ -11,7 +11,7 @@ Version-gated: verify in the repo's Angular version. The official `angular-devel
 - `NgOptimizedImage` for images (set width/height or `fill`, mark the LCP image `priority`).
 
 **Routing**
-- Lazy routes: `loadComponent` / `loadChildren`. Functional guards (`CanActivate`, `CanMatch`) and resolvers (`ResolveFn`); guards are UX, the server enforces authorization.
+- Lazy routes: `loadComponent` / `loadChildren`. Functional guards (`CanActivateFn`, `CanMatchFn`) and resolvers (`ResolveFn`); guards are UX, the server enforces authorization.
 - `withComponentInputBinding()` lets route params arrive as inputs; `withViewTransitions()` for route animations (check the version).
 - Keep route config declarative and near its feature; avoid cross-feature imports.
 

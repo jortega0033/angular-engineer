@@ -5,10 +5,10 @@ Version-gated: verify in the repo's Angular version. The official `angular-devel
 **SSR and hydration (only if the app uses `@angular/ssr`)**
 - Server-run code must not touch `window`, `document` or `localStorage` directly; use `afterNextRender`/`afterEveryRender`, `isPlatformBrowser`, or injected abstractions.
 - Avoid non-deterministic rendering (random ids, `Date.now()`) that causes hydration mismatches.
-- Never share per-request state in module-level singletons; validate the host header; never build server-side requests from raw user input (SSRF).
+- Never share per-request state in module-level singletons; set an explicit `allowedHosts` list (`security.allowedHosts` in the `angular.json` build options, no wildcard), keep `@angular/ssr` and `@angular/platform-server` on patched releases, treat `X-Forwarded-*` as untrusted unless your own proxy sets it; never build server-side requests from raw user input (SSRF).
 
 **Security**
-- Angular sanitizes by default: never `bypassSecurityTrust*` or `[innerHTML]` with untrusted input; do not build URLs or HTML from user input.
+- Angular sanitizes by default: never `bypassSecurityTrust*` on untrusted input, and treat `[innerHTML]` with untrusted rich HTML as a review point (sanitization still applies unless bypassed); do not build URLs or HTML from user input.
 - Prefer HttpOnly secure cookies over tokens in `localStorage` where feasible (+ XSRF config); authorization is enforced by the server, guards are UX.
 - Nothing secret in the client bundle or `environment` files; anything shipped to the browser is public. Never read or print secret files.
 

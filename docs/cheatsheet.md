@@ -1,4 +1,4 @@
-﻿# Angular pairing cheat sheet
+# Angular pairing cheat sheet
 
 Phone-readable. Nothing here is to memorize; it is to glance at when you blank.
 
@@ -6,13 +6,13 @@ Phone-readable. Nothing here is to memorize; it is to glance at when you blank.
 
 > "I'll clarify the request, trace the existing code, share a small plan, build the smallest working slice, test it, and then we can review it together."
 
-**Clarify -> Inspect -> Plan -> Implement -> Test -> Review -> Summarize**
+**Clarify -> Inspect -> Plan -> Implement -> Test -> Self-review -> Summarize**
 
 ## First 10 minutes in an unfamiliar repo
 
 1. `package.json`: Angular version, test runner, RxJS, state lib, UI lib, scripts.
 2. `app.config.ts` / `main.ts`: standalone? zoneless? interceptors? router?
-3. Run the app. Run the tests. Note what already fails.
+3. Run the app and the tests (own or trusted repos only; read forks statically). Note what already fails.
 4. Click through one user flow and trace it: route -> component -> service -> HTTP -> template.
 5. Say the conventions out loud: "They use X for state, Y for tests, Z folder layout."
 
@@ -75,8 +75,9 @@ Typed controls (`NonNullableFormBuilder`) -> validators -> label per input -> er
 
 `loading` / `data` / `empty` / `error` as separate states -> user-visible error message -> retry -> no stuck spinner -> cancel stale requests.
 
-## Review in 4 passes (rank by impact)
+## Review in 5 passes (rank by impact)
 
+0. **Security and data loss first:** XSS sinks, secrets, auth, anything that destroys data.
 1. **Correctness:** does it do what the request says? edge cases?
 2. **Data and races:** subscriptions, flattening operator, double submit, stale responses.
 3. **Errors and a11y:** error/empty states; keyboard, labels, focus, live regions.

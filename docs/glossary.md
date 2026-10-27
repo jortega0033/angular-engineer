@@ -61,7 +61,7 @@ Software Development Life Cycle (SDLC) = the stages work goes through from idea 
 - **Signal:** a reactive value; `computed` derives from signals; `effect` runs side effects.
 - **Zone.js / zoneless:** the older mechanism that triggers change detection automatically vs the newer signal-driven approach without it.
 - **OnPush:** change detection that only re-checks when inputs/signals change.
-- **DI (dependency injection):** Angular supplies services; use `inject()`.
+- **DI (dependency injection):** Angular supplies services; use `inject()` where the repo does.
 - **Interceptor:** code that sees every HTTP request/response (auth headers, errors).
 - **Guard / resolver:** route-level checks and data preloading.
 - **`@defer`:** lazy-load part of a template.

@@ -16,7 +16,9 @@ Predict **changed lines** (added + removed, excluding lockfiles and generated fi
 |---|---|
 | <= 100 lines and <= 10 files | One PR. |
 | <= 400 lines and <= 20 files | A dependency-ordered **stack of 2-4 PRs**; each independently reviewable, testable and revertable. Present the stack and get approval before starting. |
-| Above that, or no clean layering at any size | **Do not start.** Say "too big for one reviewable change", give the estimate and a proposed split or pre-scoping questions (spike, design doc/ADR, feature flag plan), and hand back to the human. Refusing is a valid outcome, not a failure. |
+| Above that, or a change over 100 lines with no clean layering | **Do not start.** Say "too big for one reviewable change", give the estimate and a proposed split or pre-scoping questions (spike, design doc/ADR, feature flag plan), and hand back to the human. Refusing is a valid outcome, not a failure. |
+
+A change lands in the highest row that either dimension (lines or files) reaches; count test lines. Each PR in a stack must itself fit the first row.
 
 If the whole ticket is in the third row but refines into slices (see `angular-refine`), refuse it as one change and size each slice on its own with this table; each slice may be a single PR or its own stack. Do not stretch one stack past 4 PRs.
 
@@ -36,12 +38,12 @@ Tests belong in the same PR as the behavior they prove.
 - Ambiguous request: ask for the smaller interpretation first.
 
 ## 4. Check the real diff against the estimate
-Before presenting, run `git diff --stat` (and `git diff --shortstat origin/<base>...`). If lines or files exceed the estimate by more than 50%, **stop**: report predicted vs actual, say why, and propose a split. Do not quietly open an oversized PR.
+Before presenting, run `git diff --stat` (and `git diff --shortstat origin/<base>...`). If lines or files exceed the estimate by more than 50%, or the actual diff crosses a tier boundary above, **stop**: report predicted vs actual, say why, and propose a split. Do not quietly open an oversized PR.
 
 ## 5. Commits and PR
 - Atomic commits, each doing one thing and revertable alone; conventional messages (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`) unless the repo uses another convention.
-- Branch from the latest base; short-lived, descriptive branch names.
-- **The human owns publishing.** Commit locally if asked. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. If force is ever needed on your own unshared branch, `--force-with-lease`, and only when asked.
+- Propose branching from the latest base with a short, descriptive name; create the branch only when asked.
+- **The human owns publishing.** Commit locally only if asked; invoking this skill is not that request. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. If force is ever needed on your own unshared branch, `--force-with-lease`, and only when asked.
 - PR description (use the repo's template if it exists; otherwise):
 ```
 ## Summary

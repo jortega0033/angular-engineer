@@ -12,9 +12,10 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
 
 ## Procedure
 1. **Restate (3-5 lines):** user, problem, desired outcome, and how success will be noticed. Quote the ticket's own words; mark what you inferred.
-2. **Inspect only what the questions need:** relevant routes/components/services, the API or contract involved, existing patterns and tests, version and conventions. Cite paths. Do not design yet.
+2. **Inspect only what the questions need:** relevant routes/components/services, the API or contract involved, existing patterns and tests, version and conventions. Cite paths. First check whether the requested behavior already exists (routes, services, API routes, specs); if so, cite it and treat the ticket as a gap analysis. Read the repo's CLAUDE.md/CONTRIBUTING and, if the UI relies on server-side authorization, the policy or gate that enforces it. Do not design yet.
 3. **Ask the questions that change the plan** (batch them, most important first, skip what the code already answers):
    - *Behavior:* one concrete example input -> output; edge cases; what happens with no data, slow network, failure, permission denied, and offline if relevant.
+   - *Angular:* where the state lives (component vs shared signal service); new route or lazy boundary vs an existing screen; which form approach the repo already uses; loading/empty/error, focus and live-region behavior; which existing spec to extend.
    - *Users and access:* roles, who must not see it, auth and privacy impact.
    - *UI:* design available? existing components to reuse; responsive, keyboard and screen-reader expectations; i18n and formatting.
    - *Data:* API ready or mocked? contract owner; pagination, caching, concurrency, validation rules.
@@ -40,7 +41,7 @@ Unclear goal, missing acceptance criteria, "just add X", a ticket that touches s
 End with one decision and the reason. Suggest it; do not apply tracker labels or change ticket status unless explicitly asked.
 - `implement`: passes Definition of Ready; the first slice can start.
 - `blocked`: waiting on something outside the work itself (API/contract, design, another team, environment). Name the blocker and who can unblock it.
-- `need-human`: needs a product, architecture or priority decision, or the ticket is too ambiguous or large (route to `angular-architect` or split). State the exact question.
+- `need-human`: needs a product, architecture or priority decision, or the ticket is too ambiguous or large (route to `angular-architect` or split), or it duplicates behavior that already shipped. State the exact question.
 
 ## Output format
 ```
