@@ -67,10 +67,10 @@ Angular workflow (angular-engineer plugin):
 - New to this repo -> /angular-engineer:angular-onboard
 ```
 
-**One-prompt setup (sample):** paste this into Claude Code inside the project. Claude follows the Install section, then onboards and proposes the `CLAUDE.md` changes. The `/plugin` commands are Claude Code commands, so Claude may ask you to type them yourself; do that. If the skills do not show up right after installing, restart Claude Code and send only the second sentence.
+**One-prompt setup (sample):** paste this into Claude Code inside the project. Claude follows the Install section, then onboards and proposes the `CLAUDE.md` changes. The `/plugin` commands are Claude Code commands, so Claude may ask you to type them yourself; do that. If the skills do not show up right after installing, restart Claude Code and send only the last two sentences.
 
 ```
-Install the Claude Code plugin from https://github.com/jortega0033/angular-engineer by following the Install section of its README. Then onboard me to this project and set up CLAUDE.md using the angular-onboard skill. Show me the repo map and the CLAUDE.md diff first, and wait for my approval before writing anything.
+Install the Claude Code plugin from https://github.com/jortega0033/angular-engineer by following the `/plugin` lines of the Install section of its README (do not run the `npx` line or any other shell command). Then onboard me to this project and set up CLAUDE.md using the angular-onboard skill. Show me the repo map and the CLAUDE.md diff first, and wait for my approval before writing anything.
 ```
 
 Installing never touches `CLAUDE.md`. `angular-onboard` setup mode creates a missing `CLAUDE.md` only when you ask for it; if one already exists it shows a diff and edits only after you approve.

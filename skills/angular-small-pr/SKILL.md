@@ -61,4 +61,4 @@ Follow-ups noticed but intentionally left out.
 ```
 
 ## Stop conditions
-Stop and ask the human when: the estimate lands in the stack/refuse tier; a change needs a new dependency, migration, or edits to CI/infra/secrets; the real diff blows the estimate; tests that existed must be changed to pass; or the task is ambiguous enough that two reviewers would expect different diffs.
+Stop and ask the human when: the estimate lands in the stack/refuse tier; a change needs a new dependency, migration, or edits to CI/infra/secrets; the real diff blows the estimate; tests that existed must be changed to pass and the change is not an intended behavior update; or the task is ambiguous enough that two reviewers would expect different diffs.
