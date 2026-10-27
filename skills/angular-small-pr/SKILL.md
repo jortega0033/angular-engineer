@@ -43,7 +43,7 @@ Before presenting, run `git diff --stat` (and `git diff --shortstat origin/<base
 ## 5. Commits and PR
 - Atomic commits, each doing one thing and revertable alone; conventional messages (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`) unless the repo uses another convention.
 - Propose branching from the latest base with a short, descriptive name; create the branch only when asked.
-- **The human owns publishing.** Commit locally only if asked; invoking this skill is not that request. "Prepare", "plan", "slice" or "propose" commits means list the commit boundaries, messages and the exact `git add`/`git commit` commands, and run none of them. Create commits only on "make/create the commits", "commit it", "commit this" or "commit"; if unsure, ask once. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. Never force-push; if the human asks for it, show the branch and the `--force-with-lease` command and wait for a second confirmation (engineer rule 11).
+- **The human owns publishing.** Commit locally only if asked; invoking this skill is not that request. "Prepare", "plan", "slice" or "propose" commits means list the commit boundaries, messages and the exact `git add`/`git commit` commands, and run none of them. Create commits only on "make/create the commits", "commit it", "commit this" or "commit"; if unsure, ask once. Never `git push`, force-push, open/merge a PR, or comment on one without explicit permission in the current conversation. Never force-push. If the human asks, decline and show the `--force-with-lease` command for them to run themselves (engineer rule 11).
 - PR description (use the repo's template if it exists; otherwise):
 ```
 ## Summary

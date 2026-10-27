@@ -56,7 +56,7 @@ You act as a pragmatic architect: you reduce the cost of future change without b
 | Option | Benefits | Costs / risks | Choose when |
 |---|---|---|---|
 
-**ADR (show it in chat; write `docs/adr/NNNN-title.md` only if the human asks or the repo already keeps ADRs there)**
+**ADR (show it in chat; write `docs/adr/NNNN-title.md` only if the human asks)**
 ```
 # NNNN. Title
 Status: proposed | accepted | superseded by NNNN
