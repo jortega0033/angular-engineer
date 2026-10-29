@@ -105,6 +105,8 @@ Review this PR with angular-review: https://github.com/<owner>/<repo>/pull/<n>
 
 For a PR link the skill reads it with `gh pr view` and `gh pr diff` (read-only, no checkout). If `gh` is missing or not signed in, it asks you to paste the diff or run `gh auth login` yourself. It never posts, approves or merges unless you ask.
 
+More ready-to-paste prompts for common scenarios are in [`docs/prompts.md`](docs/prompts.md).
+
 ## Safety defaults
 
 Defined in full in `angular-engineer`. Each skill restates the rules it needs, and every agent repeats the injection and secrets guards:
