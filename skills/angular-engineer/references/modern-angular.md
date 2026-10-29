@@ -19,5 +19,6 @@ Load only the file you need:
 | Forms | `references/forms.md` | Any form, validation, error display |
 | Testing | `references/testing.md` | Writing or fixing tests, choosing a runner pattern |
 | SSR, security, accessibility | `references/ssr-security-a11y.md` | SSR/hydration, HTML rendering, auth tokens, a11y baseline |
+| UI consistency | `references/ui-consistency.md` | Any new screen, component or styling; avoiding generic AI-looking UI |
 
 Rule for all of them: apply a modern API only if the repo's version supports it **and** the codebase already moves that way; otherwise match the existing style and mention the modern option as a follow-up.

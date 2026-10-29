@@ -1,7 +1,7 @@
 {
   "name": "angular-engineer",
   "description": "Angular engineering skills and agents for Claude Code: delivery workflow, architecture, code review, modernization, and shipping (CI/CD, performance, security, release).",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "author": { "name": "Jake Ortega" },
   "homepage": "https://github.com/jortega0033/angular-engineer",
   "repository": "https://github.com/jortega0033/angular-engineer",
