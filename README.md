@@ -121,6 +121,7 @@ Defined in full in `angular-engineer`. Each skill restates the rules it needs, a
 ## Practice and quick reference
 
 - [`docs/cheatsheet.md`](docs/cheatsheet.md): rhythm, React-to-Angular map, RxJS and review quick reference.
+- [`docs/prompts.md`](docs/prompts.md): ready-to-paste prompts for common scenarios.
 - [`docs/practice-drill.md`](docs/practice-drill.md): a timed pairing drill with a deliberately flawed component.
 
 ## Scope and honesty

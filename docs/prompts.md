@@ -25,12 +25,12 @@ Implement only <slice> with angular-engineer. Follow the repo's existing pattern
 
 ## Match the existing UI
 ```
-Match the existing screens: reuse the repo's components, spacing and color tokens, and tell me which ones you reused. Avoid generic AI-looking UI unless the repo already uses it.
+Use angular-engineer. Match the existing screens: reuse the repo's components, spacing and color tokens, and tell me which ones you reused. Avoid generic AI-looking UI unless the repo already uses it.
 ```
 
 ## Fix a failing test or bug
 ```
-This fails: <paste the output>. Find the root cause before proposing a fix and show the evidence. Then give the smallest fix. Keep the test; do not weaken it.
+Use angular-engineer. This fails: <paste the output>. Find the root cause before proposing a fix and show the evidence. Then give the smallest fix. Keep the test; do not weaken it.
 ```
 
 ## Review my own diff before I merge
@@ -45,7 +45,7 @@ Use angular-review on this PR: <PR url>. Read it read-only with gh (no checkout,
 
 ## Respond to review comments on my PR
 ```
-Use angular-review in author mode. Here are the comments: <paste them>. Group them, verify each claim before changing anything, draft replies for me, and do not post, push or commit.
+Use angular-review. I am the author of the PR and these are the review comments on it: <paste them>. Group them, verify each claim before changing anything, draft replies for me, and do not post, push or commit.
 ```
 
 ## Upgrade Angular or migrate patterns
@@ -67,6 +67,7 @@ Use angular-architect: <the question>. Keep it proportionate to the decision. Gi
 ```
 Stop. Do not change anything else. List what you changed and why in a short table, then propose the minimal path back.
 ```
+Or:
 ```
 You are over-building. Remove everything the request did not ask for and show me the diff.
 ```
