@@ -7,6 +7,7 @@ Version-gated: verify in the repo's Angular version. The official `angular-devel
 - **Component tests:** `TestBed.configureTestingModule({ imports: [Cmp], providers: [...] })`; `fixture.componentRef.setInput('name', v)`; `await fixture.whenStable()`; query by role/text, not CSS classes. Use component harnesses (Angular Material/CDK) when the repo does.
 - **HTTP:** `provideHttpClient()` + `provideHttpClientTesting()`; `HttpTestingController` (`expectOne`, `flush`, error flush, `verify()`).
 - **Router:** `RouterTestingHarness` for navigation, guards and resolvers.
+- **Order and boundaries:** for latest-wins requests, issue two requests and flush them in reverse order (with `HttpTestingController`, check the older `TestRequest` was `cancelled`), then assert loading, error and results. For range or interval logic, write the expected table before the code: containment both ways, touching at the start, touching at the end, identical, separate. Drive the rendered control (type, click) rather than calling the component method, so binding bugs show.
 - **Coverage of behavior:** happy path, one error path, one empty/edge case. A test that still passes if the feature is deleted is worthless. Coverage numbers are a signal, not a target.
 - **E2E:** few critical journeys; stable selectors (roles, test ids); no sleeps; run against a built app.
 - **Never** weaken, skip or delete existing tests to get green.

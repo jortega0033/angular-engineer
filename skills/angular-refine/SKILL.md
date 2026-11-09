@@ -63,3 +63,4 @@ Write it to a file or a tracker only if asked.
 - Do not invent requirements; unknowns become questions. If nobody can answer now, put a proposed default beside each question, mark it reversible or not, and choose `implement` only when every default is reversible.
 - Do not pick a design or library here; flag the decision and route it to `angular-architect`.
 - Keep the plan short enough to read in one sitting; detail belongs in the slices, not in prose.
+- Do not defer a step the workflow cannot complete without (for example, the person who must act never learns there is a request). Cut optional filters and polish first. A pending state must not change the committed record (a published schedule, a balance) until the final approval, and the server rechecks its rules at that point.
