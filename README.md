@@ -128,7 +128,7 @@ Defined in full in `angular-engineer`. Each skill restates the rules it needs, a
 
 - Angular moves fast. The repo's `package.json` and [angular.dev](https://angular.dev) are the source of truth; the skills tell the agent to check them. APIs such as `resource()`/`httpResource()`, signal forms and zoneless have had varying stability across versions, so the agent verifies first.
 - This is guidance, not a guarantee. Review every diff and run the tests.
-- `node scripts/validate.mjs` checks structure and consistency (names, tools versus claims, safety text, cross-references, README coverage); `node scripts/validate.test.mjs` proves the validator fails on broken copies. Neither measures how well an agent follows the skills. Trials so far (one public Angular app, a Laravel + Angular monorepo and scratch fixtures with planted bugs and prompt-injection text) were mostly static reads with the agents played by a model, so they are evidence, not proof.
+- The repo ships no scripts. A structure and consistency check (names, tools versus claims, safety text, cross-references, README coverage) is kept outside the plugin and is run by the maintainer before each release. It does not measure how well an agent follows the skills. Trials so far (one public Angular app, a Laravel + Angular monorepo and scratch fixtures with planted bugs and prompt-injection text) were mostly static reads with the agents played by a model, so they are evidence, not proof.
 - Not verified here: how Claude Code resolves plugin agent names in every context, and behavior on real Angular repos.
 
 ## Contributing
