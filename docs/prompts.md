@@ -40,7 +40,7 @@ Use angular-review on my current diff. Do not edit anything. Rank findings by im
 
 ## Review a colleague's pull request
 ```
-Use angular-review on this PR: <PR url>. Read it read-only with gh (no checkout, no comments). Start with the intent: say in one sentence what the PR is for; if you cannot, ask me. Triage files into core, plumbing and noise and review only the core. Label findings blocker, should fix or nit, and describe the effect on the user. Suggest a verdict; I decide whether to approve.
+Use angular-review on this PR: <PR url>. I will paste the description and diff (no checkout, no comments). Start with the intent: say in one sentence what the PR is for; if you cannot, ask me. Triage files into core, plumbing and noise and review only the core. Label findings blocker, should fix or nit, and describe the effect on the user. Suggest a verdict; I decide whether to approve.
 ```
 
 ## Respond to review comments on my PR
