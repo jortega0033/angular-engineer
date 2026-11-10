@@ -13,7 +13,7 @@ One idea runs through it: **the human decides, the agent does the legwork and sh
 | `angular-onboard` | Getting a human oriented in an existing repo: evidence-cited map, how to run it, one traced flow, hot spots, first contribution options. |
 | `angular-architect` | Design and decisions: requirements, options and trade-offs, state and structure, ADRs, risk, slicing work. |
 | `angular-small-pr` | Sizing before coding (default: up to 100 lines and 10 files is one PR, up to 400 and 20 is a stack of 2-4, above that refuse and pre-scope), checking the real diff against the estimate, commits and PR description. Adapted from [pipenzo](https://github.com/jortega0033/pipenzo). |
-| `angular-review` | Reviewing a diff or PR: security, correctness, races, errors, accessibility, performance, tests, with a walkthrough and severity tiers. |
+| `angular-review` | Reviewing a diff or PR: security, correctness, races, errors, accessibility, performance, tests, with a walkthrough, severity tiers and a coverage line for each review step. Also responding to review comments. |
 | `angular-modernize` | Upgrades and migrations: `ng update`, standalone, control flow, signals, zoneless, test runner. |
 | `angular-ship` | CI quality gates, performance, security hardening, release and rollback, observability. |
 
@@ -56,7 +56,7 @@ Optional but recommended, run in a terminal (the Angular team's official skill, 
 
 Skills are then available as `/angular-engineer:angular-architect` and so on. Plugin agents may appear with the plugin prefix (`angular-engineer:angular-reviewer`).
 
-**Skills may not be selected automatically.** In trials they fired from plain requests, but that is not guaranteed, so invoke by name (`/angular-engineer:angular-refine`) or put this routing note in your project's `CLAUDE.md`:
+**Skills may not be selected automatically.** In trials they often fired from plain requests, but a plain "review the last commit" was handled without the skill, so invoke by name (`/angular-engineer:angular-refine`) or put this routing note in your project's `CLAUDE.md`:
 
 ```
 Angular workflow (angular-engineer plugin):
@@ -81,31 +81,118 @@ Installing never touches `CLAUDE.md`. `angular-onboard` setup mode creates a mis
 
 If a repo already has its own `AGENTS.md` or `CLAUDE.md`, keep it: its restrictions are added to the safety rules, but it never grants permission for rules 3-5.
 
-## Try it
+## Usage
+
+Name the skill in your request (or mention Angular). A plain "review the last commit" may be handled without the skill. Each example says what you get back; nothing is committed, pushed or posted unless you ask in plain words.
+
+### 1. First day in a repo
 
 ```
-Use angular-onboard on this repo. Read-only: give me the map, how to run it, one traced flow, and two first-task options.
+Use angular-onboard, read-only. Give me the stack, how to run and test it, one user flow traced from route to template, and two small first tasks. Mark each claim Verified or Inferred.
+```
+
+You get a map with `file:line` evidence for each claim and the commands it actually ran. It ends by offering to set up `CLAUDE.md`, which it writes only if you ask.
+
+### 2. A vague ticket
+
+```
+Use angular-refine on this ticket: "Employees can swap shifts". No code. Ask me the questions that change what we build, one at a time, then give acceptance criteria and the thinnest first slice.
+```
+
+You get one decision-changing question at a time, each with a proposed default. For example: is it an exchange or a cover request, and who gives final approval? Then Given/When/Then criteria, ordered slices and a decision: implement, blocked or need-human.
+
+### 3. Size it before coding
+
+```
+Use angular-small-pr: estimate lines and files for adding search to the employee list. One PR or a stack?
+```
+
+You get an estimate such as "~80 lines, 4 files: one PR", or a stack of 2-4 PRs in dependency order. A change too big to review gets a refusal and a proposed split.
+
+### 4. Build a slice
+
+```
+Use angular-engineer to add server-side search to the employee list. Latest search wins, show loading, empty and error states, Retry re-runs a failed search. Plan first and wait for my OK.
+```
+
+It inspects the version and conventions, traces the existing list, and plans with a check for each step. It then implements, writes the test from the acceptance check (not from its own code), runs it, and summarizes what was checked and what was not.
+
+### 5. A timed exercise or pairing session
+
+```
+Use angular-engineer. We have 35 minutes. Add employee search to this list. Keep the slice small enough to verify, and stop adding scope near the end.
+```
+
+It confirms the time limit and picks the thinnest slice it can verify. When cutting, it drops polish before correctness, permissions or error handling. It ends with: what works, what was checked (executed, not just read), what is not verified, and the next check.
+
+### 6. A failing test or bug
+
+```
+Use angular-engineer. This fails: <paste the output>. Find the root cause with evidence before proposing a fix. Keep the test.
+```
+
+It first gets a red signal (a failing test or a reproduction), finds the cause, makes the smallest fix, and keeps the test that proves it.
+
+### 7. Review before merge
+
+Your own work:
+
+```
+Use angular-review on my branch against main (or: on HEAD~1..HEAD). Don't edit anything.
+```
+
+A colleague's PR: fetch it locally yourself, then review the branch. The plugin does not call GitHub.
+
+```
+git fetch origin pull/<n>/head:pr-<n>
 ```
 
 ```
-/angular-engineer:angular-architect  We need offline-capable drafts in the editor. Propose options and an ADR.
+Use angular-review on pr-<n> against main. The ticket: <paste it>. Static review only; don't run their code.
+```
+
+You get:
+
+- **Walkthrough:** what the change does.
+- **Verdict:** a suggestion. You decide whether to approve.
+- **Findings:** blockers, should-fix and nits, each with `file:line`, the input or sequence that triggers it, what the user sees and the smallest fix.
+- **Good:** what is good, named specifically.
+- **Coverage:** one line per review step (story, blast radius, behavior, core, comments, AI extras).
+- **Not verified:** what it did not run.
+
+An open question that could be a blocker stays under Blockers until it is answered. The steps follow the [code review checklist](https://jakeortega.nl/code-review-checklist/).
+
+For an auth, HTML-rendering or large diff, ask for the agents too:
+
+```
+Use angular-review on my branch, and run angular-security-auditor and angular-scope-reviewer in parallel.
+```
+
+### 8. Respond to review comments, or run a fix cycle
+
+```
+Use angular-review. I'm the author; here are the comments: <paste them>. Verify each claim before changing anything and draft replies. Don't post or push.
 ```
 
 ```
-Use angular-small-pr: estimate this change before coding, and tell me if it should be a stack.
+Use angular-review to review and fix my branch until no blockers remain, at most 3 rounds. Never weaken a test.
+```
+
+### 9. A design question, an upgrade, or CI
+
+```
+Use angular-architect: signals store or NgRx for the schedule editor? Two or three options, trade-offs, a recommendation, and what would change your mind.
 ```
 
 ```
-Review my current diff with angular-review, and run angular-security-auditor and angular-scope-reviewer in parallel.
+Use angular-modernize to plan the upgrade from Angular 20 to 22. Plan only: ordered steps, what could break, rollback.
 ```
 
 ```
-Review this PR with angular-review: https://github.com/<owner>/<repo>/pull/<n>
+Use angular-ship to review our CI and bundle budgets. Propose changes as a diff; don't edit pipelines.
 ```
 
-For a PR, paste its description and diff (or a local branch) into the chat. The plugin makes no network calls, does not use the GitHub CLI and never reads a token or login. It never posts, approves or merges unless you ask.
-
-More ready-to-paste prompts for common scenarios are in [`docs/prompts.md`](docs/prompts.md).
+More prompts, including what to say when the agent goes off track, are in [`docs/prompts.md`](docs/prompts.md).
 
 ## Safety defaults
 
@@ -128,12 +215,12 @@ Defined in full in `angular-engineer`. Each skill restates the rules it needs, a
 
 - Angular moves fast. The repo's `package.json` and [angular.dev](https://angular.dev) are the source of truth; the skills tell the agent to check them. APIs such as `resource()`/`httpResource()`, signal forms and zoneless have had varying stability across versions, so the agent verifies first.
 - This is guidance, not a guarantee. Review every diff and run the tests.
-- The repo ships no scripts. A structure and consistency check (names, tools versus claims, safety text, cross-references, README coverage) is kept outside the plugin and is run by the maintainer before each release. It does not measure how well an agent follows the skills. Trials so far (one public Angular app, a Laravel + Angular monorepo and scratch fixtures with planted bugs and prompt-injection text) were mostly static reads with the agents played by a model, so they are evidence, not proof.
+- The repo ships no scripts. A structure and consistency check (names, tools versus claims, safety text, cross-references, README coverage) is kept outside the plugin and is run by the maintainer before each release. It does not measure how well an agent follows the skills. Trials so far (one public Angular app, a Laravel + Angular monorepo and scratch fixtures with planted bugs and prompt-injection text) were mostly static reads with the agents played by a model, so they are evidence, not proof. In the 0.5.9 trial on three fixtures with known bugs, the previous version also found every planted bug; the change mostly sharpened severity and the shape of findings.
 - Not verified here: how Claude Code resolves plugin agent names in every context, and behavior on real Angular repos.
 
 ## Contributing
 
-Issues and PRs welcome: corrections for newer Angular versions, review checks, conventions from real codebases. Keep skills under 200 lines (detail goes in `references/`) and keep PRs small. Run both scripts before opening a PR (Node 20.11 or newer).
+Issues and PRs welcome: corrections for newer Angular versions, review checks, conventions from real codebases. Keep skills under 200 lines (detail goes in `references/`) and keep PRs small. The plugin directory accepts only Markdown, text, JSON, YAML and images from this repo, so do not add scripts or other file types.
 
 ## License
 

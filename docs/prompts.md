@@ -28,6 +28,11 @@ Implement only <slice> with angular-engineer. Follow the repo's existing pattern
 Use angular-engineer. Match the existing screens: reuse the repo's components, spacing and color tokens, and tell me which ones you reused. Avoid generic AI-looking UI unless the repo already uses it.
 ```
 
+## A timed exercise or pairing session
+```
+Use angular-engineer. We have <minutes> minutes for <task>. Confirm the slice with me, keep it small enough to verify, cut polish before correctness or error handling, and stop adding scope near the end. Finish with what works, what you checked, what is not verified and the next check.
+```
+
 ## Fix a failing test or bug
 ```
 Use angular-engineer. This fails: <paste the output>. Find the root cause before proposing a fix and show the evidence. Then give the smallest fix. Keep the test; do not weaken it.
@@ -39,8 +44,9 @@ Use angular-review on my current diff. Do not edit anything. Rank findings by im
 ```
 
 ## Review a colleague's pull request
+First fetch it yourself: `git fetch origin pull/<n>/head:pr-<n>` (or paste the description and diff instead). Then:
 ```
-Use angular-review on this PR: <PR url>. I will paste the description and diff (no checkout, no comments). Start with the intent: say in one sentence what the PR is for; if you cannot, ask me. Triage files into core, plumbing and noise and review only the core. Label findings blocker, should fix or nit, and describe the effect on the user. Suggest a verdict; I decide whether to approve.
+Use angular-review on pr-<n> against main. The ticket: <paste it>. Static review only (no running their code, no comments). Start with the intent: say in one sentence what the PR is for; if you cannot, ask me. Triage files into core, plumbing and noise; focus on the core and glance at the rest. Label findings blocker, should fix or nit, and describe the effect on the user. Suggest a verdict; I decide whether to approve.
 ```
 
 ## Respond to review comments on my PR
